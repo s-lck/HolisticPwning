@@ -1,5 +1,5 @@
 site_name: Holistic Pwning
-site_description: 'x'
+site_description: 'Bring you offensive spirit to the next level'
 site_url: https://s-lck.github.io/HolisticPwning
 
 repo_url: https://github.com/s-lck/HolisticPwning
@@ -13,6 +13,7 @@ theme:
   icon:
     repo: fontawesome/brands/github
   palette:
+      primary: brown
     # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
       scheme: default
