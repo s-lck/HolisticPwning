@@ -13,16 +13,18 @@ theme:
   icon:
     repo: fontawesome/brands/github
   palette:
-    - primary: brown
+    
     # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
-      scheme: default
+      primary: brown
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
 
     # Palette toggle for dark mode
     - media: "(prefers-color-scheme: dark)"
+      scheme: default      
+      primary: brown    
       scheme: slate
       toggle:
         icon: material/brightness-4
