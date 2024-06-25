@@ -42,6 +42,8 @@ extra_css:
     - custom.css
 
 markdown_extensions:
+  - attr_list
+  - md_in_html
   - def_list
   - pymdownx.tasklist:
       custom_checkbox: true
