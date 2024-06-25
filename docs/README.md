@@ -8,7 +8,7 @@ Un site à 99.9 % en langue française rédigé par un franco-québécois d'adop
 
 <div class="grid cards" markdown>
 
--   __Holistique__
+-   :simple-internetcomputer:{ .lg .middle } __Holistique__
 
     ---
 
@@ -16,7 +16,7 @@ Un site à 99.9 % en langue française rédigé par un franco-québécois d'adop
 
     [:octicons-arrow-right-24: Holistique](https://fr.wiktionary.org/wiki/holistique)
 
--   __Pwning__
+-   :simple-haveibeenpwned:{ .lg .middle } __Pwning__
 
     ---
 
