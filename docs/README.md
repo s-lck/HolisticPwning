@@ -1,10 +1,8 @@
 # Holistic Pwning
 
-!!! quote "Holistic Pwning"
+!!! quote " "
 
     <div align="center">**Bring your offensive spirit to the next level**</div>
-
-Un site à 99.9 % en langue française rédigé par un franco-québécois d'adoption.
 
 <div class="grid cards" markdown>
 
@@ -23,5 +21,18 @@ Un site à 99.9 % en langue française rédigé par un franco-québécois d'adop
     Associé à *perfectly own* - gagner avec de la marge
 
     [:octicons-arrow-right-24: Pwning](https://fr.wiktionary.org/wiki/pwn#en)
+
+</div>
+
+!!! quote " "
+
+    <div align="center">Bloc-note à ciel ouvert rédigé à 99.9 % en langue française par un franco-québécois d'adoption.</div>
+
+<div class="grid cards" markdown>
+
+- :fontawesome-solid-wind: __No bullshit__
+- :material-code-tags: __Only technical shit__
+- :octicons-arrow-left-16: __Few misspellings__
+- :simple-metrodeparis: __French only__
 
 </div>
