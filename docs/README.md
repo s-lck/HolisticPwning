@@ -26,7 +26,7 @@
 
 !!! quote " "
 
-    <div align="center">Bloc-note à ciel ouvert rédigé à 99.9 % en langue française par un franco-québécois d'adoption.</div>
+    <div align="center">**Bloc-note à ciel ouvert rédigé à 99.9 % en langue française par un franco-québécois d'adoption.**</div>
 
 <div class="grid cards" markdown>
 
