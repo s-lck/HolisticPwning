@@ -10,7 +10,7 @@
 
     ---
 
-    Qui relève de l’holisme, considérant l’objet comme constituant d'un tout.
+    Qui relève de l’holisme, considérant l’objet comme constituant d'un tout
 
     [:octicons-arrow-right-24: Holistique](https://fr.wiktionary.org/wiki/holistique)
 
