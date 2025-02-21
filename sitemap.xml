@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://s-lck.github.io/HolisticPwning/</loc>
+         <lastmod>2025-02-21</lastmod>
+    </url>
+    <url>
+         <loc>https://s-lck.github.io/HolisticPwning/binary-exploitation/0-architecture-x86/</loc>
+         <lastmod>2025-02-21</lastmod>
+    </url>
+    <url>
+         <loc>https://s-lck.github.io/HolisticPwning/binary-exploitation/1-stack-overflow/</loc>
+         <lastmod>2025-02-21</lastmod>
+    </url>
+    <url>
+         <loc>https://s-lck.github.io/HolisticPwning/binary-exploitation/2-seh-overflow/</loc>
+         <lastmod>2025-02-21</lastmod>
+    </url>
+    <url>
+         <loc>https://s-lck.github.io/HolisticPwning/binary-exploitation/3-egghunters/</loc>
+         <lastmod>2025-02-21</lastmod>
+    </url>
+    <url>
+         <loc>https://s-lck.github.io/HolisticPwning/binary-exploitation/4-shellcode/</loc>
+         <lastmod>2025-02-21</lastmod>
+    </url>
+</urlset>
