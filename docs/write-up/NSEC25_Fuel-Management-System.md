@@ -1,4 +1,4 @@
-# Fuel Management System
+# NSEC25 : Fuel Management System
 
 During the [NSEC25 CTF](https://nsec.io/competition/) I had the opportunity to solve the following challenge with the help of my colleague [Ashiahanim Ayassor](https://www.linkedin.com/in/ash-ay/). I will detail all the steps of this challenge in this blog post.
 

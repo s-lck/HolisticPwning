@@ -1,4 +1,4 @@
-# NSEC24 - Write-up : Photographic Memory System
+# NSEC24 : Photographic Memory System
 
 ## Challenge
 
